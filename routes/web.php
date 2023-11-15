@@ -24,4 +24,10 @@ Auth::routes();
 
 
 
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
+// Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
+
+
+
+
