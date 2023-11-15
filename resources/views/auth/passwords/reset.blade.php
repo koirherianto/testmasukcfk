@@ -1,78 +1,110 @@
-<x-laravel-ui-adminlte::adminlte-layout>
+@extends('layouts.master-without-nav')
+@section('title')
+    Register
+@endsection
+@section('page-title')
+    Register
+@endsection
+@section('body')
 
-    <body class="hold-transition login-page">
-        <div class="login-box">
-            <div class="login-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
-            </div>
+    <body>
+    @endsection
+    @section('content')
+        <div class="authentication-bg min-vh-100">
+            <div class="bg-overlay bg-light"></div>
+            <div class="container">
+                <div class="d-flex flex-column min-vh-100 px-3 pt-4">
+                    <div class="row justify-content-center my-auto">
+                        <div class="col-md-8 col-lg-6 col-xl-5">
 
-            <div class="card">
-                <div class="card-body login-card-body">
-                    <p class="login-box-msg">You are only one step a way from your new password, recover your password
-                        now.</p>
-
-                    <form action="{{ route('password.update') }}" method="POST">
-                        @csrf
-
-                        @php
-                            if (!isset($token)) {
-                                $token = \Request::route('token');
-                            }
-                        @endphp
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="input-group mb-3">
-                            <input type="email" name="email"
-                                class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                placeholder="Email">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+                            <div class="mb-4 pb-2">
+                                <a href="index" class="d-block auth-logo">
+                                    <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="" height="30"
+                                        class="auth-logo-dark me-start">
+                                    <img src="{{ URL::asset('build/images/logo-light.png') }}" alt="" height="30"
+                                        class="auth-logo-light me-start">
+                                </a>
                             </div>
-                            @if ($errors->has('email'))
-                                <span class="error invalid-feedback">{{ $errors->first('email') }}</span>
-                            @endif
-                        </div>
 
-                        <div class="input-group mb-3">
-                            <input type="password" name="password"
-                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                placeholder="Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <div class="text-center mt-2">
+                                        <h5>Create New Password</h5>
+                                        <p class="text-muted">secure your account with webadmin.</p>
+                                    </div>
+                                    <div class="p-2 mt-4">
+                                        <form method="POST" action="{{ route('password.update') }}" class="auth-input">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                                <input id="email" type="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    name="email" value="{{ $email ?? old('email') }}" required
+                                                    autocomplete="email" autofocus>
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="password-input">Password <span class="text-danger">*</span></label>
+                                                <input type="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    name="password" placeholder="Enter password" id="password-input"
+                                                    aria-describedby="passwordInput" required="">
+                                                @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div id="passwordInput" class="form-text">Your password must be
+                                                    8-20
+                                                    characters long.</div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="confirm-password-input">Confirm
+                                                    Password <span class="text-danger">*</span></label>
+                                                <input type="password" class="form-control" name="password_confirmation"
+                                                    placeholder="Confirm password" id="confirm-password-input"
+                                                    required="">
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <button class="btn btn-primary w-100" type="submit">Reset
+                                                    Password</button>
+                                            </div>
+
+                                            <div class="mt-4 text-center">
+                                                <p class="mb-0">Remember your password ? <a href="{{ route('login') }}"
+                                                        class="fw-medium text-primary"> Login</a></p>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
                             </div>
-                            @if ($errors->has('password'))
-                                <span class="error invalid-feedback">{{ $errors->first('password') }}</span>
-                            @endif
-                        </div>
 
-                        <div class="input-group mb-3">
-                            <input type="password" name="password_confirmation" class="form-control"
-                                placeholder="Confirm Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-center p-4">
+                                <p>©
+                                    <script>
+                                        document.write(new Date().getFullYear())
+                                    </script> webadmin. Crafted with <i
+                                        class="mdi mdi-heart text-danger"></i> by Themesdesign
+                                </p>
                             </div>
-                            @if ($errors->has('password_confirmation'))
-                                <span
-                                    class="error invalid-feedback">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </form>
-
-                    <p class="mt-3 mb-1">
-                        <a href="{{ route('login') }}">Login</a>
-                    </p>
                 </div>
-                <!-- /.login-card-body -->
-            </div>
-
+            </div><!-- end container -->
         </div>
-    </body>
-</x-laravel-ui-adminlte::adminlte-layout>
+        <!-- end authentication section -->
+    @endsection
