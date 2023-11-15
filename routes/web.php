@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/homx', [App\Http\Controllers\HomeController::class, 'home'])->name('homex');
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 Auth::routes();
+
+
+
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');

@@ -1,10 +1,12 @@
-<li class="nav-item">
-    <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.index') }}" class="nav-link @{{ Request::is('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}*') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-home"></i>
-@if($config->options->localized)
-        <p>@@lang('models/{{ $config->modelNames->camelPlural }}.plural')</p>
-@else
-        <p>{{ $config->modelNames->humanPlural }}</p>
-@endif
+<li>
+    <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.
+    ') !!}{!! $config->modelNames->camelPlural !!}.index') }}">
+        <i class="bx bx-calendar-event icon nav-icon"></i>
+        @if ($config->options->localized)
+            <span class="menu-item"
+                data-key="t-calendar">@@lang('models/{{ $config->modelNames->camelPlural }}.plural')</span>
+        @else
+            <span class="menu-item" data-key="t-calendar">{{ $config->modelNames->humanPlural }}</span>
+        @endif
     </a>
 </li>

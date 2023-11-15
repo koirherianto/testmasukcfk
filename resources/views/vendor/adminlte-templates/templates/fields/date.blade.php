@@ -1,11 +1,11 @@
 <!-- {{ $fieldTitle }} Field -->
 <div class="form-group col-sm-6">
 @if($config->options->localized)
-    @{!! Form::label('{{ $fieldName }}', __('models/{{ $config->modelNames->camelPlural }}.fields.{{ $fieldName }}').':') !!}
+    @{!! Form::date('{{ $fieldName }}', __('models/{{ $config->modelNames->camelPlural }}.fields.{{ $fieldName }}').':') !!}
 @else
-    @{!! Form::label('{{ $fieldName }}', '{{ $fieldTitle }}:') !!}
+    @{!! Form::date('{{ $fieldName }}', '{{ $fieldTitle }}:') !!}
 @endif
-    @{!! Form::text('{{ $fieldName }}', null, ['class' => 'form-control','id'=>'{{ $fieldName }}']) !!}
+    @{!! Form::date('{{ $fieldName }}', ${{ $config->modelNames->camelPlural }}->fieldName ?? date('Y-m-d'), ['class' => 'form-control','id'=>'{{ $fieldName }}']) !!}
 </div>
 
 @@push('page_scripts')

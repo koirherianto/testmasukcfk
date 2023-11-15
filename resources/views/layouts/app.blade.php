@@ -1,4 +1,4 @@
-{{-- <x-laravel-ui-adminlte::adminlte-layout>
+<x-laravel-ui-adminlte::adminlte-layout>
 
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
@@ -63,4 +63,4 @@
             </footer>
         </div>
     </body>
-</x-laravel-ui-adminlte::adminlte-layout> --}}
+</x-laravel-ui-adminlte::adminlte-layout>
