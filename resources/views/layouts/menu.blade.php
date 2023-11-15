@@ -6,6 +6,13 @@
     </a>
 </li> --}}
 
+<li>
+    <a href={{ route('homex') }}>
+        <i class="bx bx-calendar-event icon nav-icon"></i>
+        <span class="menu-item" data-key="t-calendar">Home</span>
+    </a>
+</li>
+
 
 <li class="menu-title" data-key="t-menu">Dashboard</li>
 

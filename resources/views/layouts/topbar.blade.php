@@ -22,10 +22,22 @@
                 </a>
             </div>
 
-            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect vertical-menu-btn">
+            {{-- tombol buka --}}
+            <button id="autoClickButton" type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect vertical-menu-btn">
                 <i class="bx bx-menu align-middle"></i>
             </button>
 
+            <script>
+                // Simulasikan klik pada tombol saat halaman dimuat
+                document.addEventListener("DOMContentLoaded", function () {
+                    var button = document.getElementById("autoClickButton");
+                    if (button) {
+                        button.click(); // Simulasi klik pada tombol
+                    }
+                });
+            </script>
+
+            
             <!-- start page title -->
             <div class="page-title-box align-self-center d-none d-md-block">
                 <h4 class="page-title mb-0">@yield('page-title')</h4>
