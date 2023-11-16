@@ -1,39 +1,36 @@
-@@extends('layouts.app')
 
+@@extends('layouts.master')
+@@section('title')
+{{ $config->modelNames->humanPlural }}
+@@endsection
+@@section('page-title')
+{{ $config->modelNames->humanPlural }}
+@@endsection
+@@section('body')
+
+<body>
+@@endsection
 @@section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-@if($config->options->localized)
-                    <h1>@@lang('models/{{ $config->modelNames->camelPlural }}.plural')</h1>
-@else
-                    <h1>{{ $config->modelNames->humanPlural }}</h1>
-@endif
-                </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
-                       href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.create') }}">
-@if($config->options->localized)
-                         @@lang('crud.add_new')
-@else
-                        Add New
-@endif
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <div class="content px-3">
+    @@include('flash::message')
 
-        @@include('flash::message')
-
-        <div class="clearfix"></div>
-
-        <div class="card">
-            {!! $table !!}
-        </div>
-    </div>
+    {!! $table !!}
 
 @@endsection
+@@section('scripts')
+    {{-- apexcharts --}}
+    @verbatim
+    <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+    @endverbatim
+
+    {{-- dashboard-sales.init.js --}}
+    @verbatim
+    <script src="{{ URL::asset('build/js/pages/dashboard-sales.init.js') }}"></script>
+    @endverbatim
+
+    {{-- App js --}}
+    @verbatim
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    @endverbatim
+@@endsection
+

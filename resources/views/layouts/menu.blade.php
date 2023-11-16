@@ -282,3 +282,19 @@
 
 
 
+
+
+
+<li>
+    <a href="{{ route('coys.index') }}">
+        <i class="bx bx-calendar-event icon nav-icon"></i>
+                    <span class="menu-item" data-key="t-calendar">Coys</span>
+            </a>
+</li>
+
+<li>
+    <a href="{{ route('kucings.index') }}">
+        <i class="bx bx-calendar-event icon nav-icon"></i>
+                    <span class="menu-item" data-key="t-calendar">Kucings</span>
+            </a>
+</li>

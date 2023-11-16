@@ -27,7 +27,7 @@
                 <i class="bx bx-menu align-middle"></i>
             </button>
 
-            <script>
+            {{-- <script>
                 // Simulasikan klik pada tombol saat halaman dimuat
                 document.addEventListener("DOMContentLoaded", function () {
                     var button = document.getElementById("autoClickButton");
@@ -35,7 +35,7 @@
                         button.click(); // Simulasi klik pada tombol
                     }
                 });
-            </script>
+            </script> --}}
 
             
             <!-- start page title -->

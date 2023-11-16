@@ -933,6 +933,166 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td>
+                                            <div class="avatar">
+                                                <div
+                                                    class="product-img avatar-title img-thumbnail bg-soft-success border-0">
+                                                    <img src="{{ URL::asset('build/images/product/img-2.png') }}"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="fw-semibold">Sofa Home Chair Black</td>
+                                        <td>
+                                            Connie Franco
+                                        </td>
+                                        <td>
+                                            #746648
+                                        </td>
+                                        <td>
+                                            Black
+                                        </td>
+                                        <td>14/01/2022</td>
+                                        <td><span class="badge badge-soft-success font-size-12">Active</span></td>
+                                        <td>
+                                            <div id="chart-sparkline2" data-colors='["#1f58c7"]'></div>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-muted dropdown-toggle font-size-18" role="button"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true">
+                                                    <i class="mdi mdi-dots-horizontal"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Print</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="avatar">
+                                                <div
+                                                    class="product-img avatar-title img-thumbnail bg-soft-danger border-0">
+                                                    <img src="{{ URL::asset('build/images/product/img-3.png') }}"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="fw-semibold">Tuition Classes Chair</td>
+                                        <td>
+                                            Paul Reynolds
+                                        </td>
+                                        <td>
+                                            #125635
+                                        </td>
+                                        <td>
+                                            Crime
+                                        </td>
+                                        <td>17/01/2022</td>
+                                        <td><span class="badge badge-soft-success font-size-12">Active</span></td>
+                                        <td>
+                                            <div id="chart-sparkline3" data-colors='["#1f58c7"]'></div>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-muted dropdown-toggle font-size-18" role="button"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true">
+                                                    <i class="mdi mdi-dots-horizontal"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Print</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="avatar">
+                                                <div
+                                                    class="product-img avatar-title img-thumbnail bg-soft-primary border-0">
+                                                    <img src="{{ URL::asset('build/images/product/img-4.png') }}"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="fw-semibold">Dining Table Chair</td>
+                                        <td>
+                                            Ronald Patterson
+                                        </td>
+                                        <td>
+                                            #236521
+                                        </td>
+                                        <td>
+                                            Crime
+                                        </td>
+                                        <td>18/01/2022</td>
+                                        <td><span class="badge badge-soft-primary font-size-12">Pending</span></td>
+                                        <td>
+                                            <div id="chart-sparkline4" data-colors='["#1f58c7"]'></div>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-muted dropdown-toggle font-size-18" role="button"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true">
+                                                    <i class="mdi mdi-dots-horizontal"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Print</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div class="avatar">
+                                                <div
+                                                    class="product-img avatar-title img-thumbnail bg-soft-success border-0">
+                                                    <img src="{{ URL::asset('build/images/product/img-5.png') }}"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="fw-semibold">Home & Office Chair</td>
+                                        <td>
+                                            Adella Perez
+                                        </td>
+                                        <td>
+                                            #236521
+                                        </td>
+                                        <td>
+                                            Crime
+                                        </td>
+                                        <td>18/01/2022</td>
+                                        <td><span class="badge badge-soft-primary font-size-12">Pending</span></td>
+                                        <td>
+                                            <div id="chart-sparkline5" data-colors='["#1f58c7"]'></div>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="text-muted dropdown-toggle font-size-18" role="button"
+                                                    data-bs-toggle="dropdown" aria-haspopup="true">
+                                                    <i class="mdi mdi-dots-horizontal"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="#">Print</a>
+                                                    <a class="dropdown-item" href="#">Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
