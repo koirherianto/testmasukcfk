@@ -7,9 +7,6 @@ use App\Http\Requests\UpdateCoyRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\CoyRepository;
 use Illuminate\Http\Request;
-
-use Validator;
-
 use Flash;
 
 class CoyController extends AppBaseController
@@ -90,20 +87,8 @@ class CoyController extends AppBaseController
     /**
      * Update the specified Coy in storage.
      */
-    public function update($id, Request $request)
+    public function update($id, UpdateCoyRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama' => 'required|string|max:11',
-            'tanggal_lahir' => 'required',
-            'tinggi' => 'required|min:10',
-            'penjelasan' => 'required|string|max:65535',
-            'created_at' => 'nullable',
-            'updated_at' => 'nullable'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
         $coy = $this->coyRepository->find($id);
 
         if (empty($coy)) {

@@ -6,4 +6,9 @@
     @{!! Form::label('{{ $fieldName }}', '{{ $fieldTitle }}', ['class' => 'form-check-label']) !!}
 @endif
     {!! $radioButtons !!}
+    @@error('{{ $fieldName }}') @verbatim
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror @endverbatim
 </div>

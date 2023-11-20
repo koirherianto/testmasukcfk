@@ -1,19 +1,25 @@
-{{-- Debugging: Dump the $errors variable --}}
-{{-- @dump($errors) --}}
-
 <!-- Nama Field -->
 <div class="form-group col-sm-6 mb-2">
     {!! Form::label('nama', 'Nama:') !!}
     {!! Form::text('nama', null, ['class' => 'form-control', 'required', 'maxlength' => 11, 'maxlength' => 11]) !!}
+    @error('nama') 
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    
 </div>
 
 <!-- Tanggal Lahir Field -->
 <div class="form-group col-sm-6 mb-2">
     {!! Form::label('tanggal_lahir', 'Tanggal Lahir:') !!}
-    {!! Form::date('tanggal_lahir', $coy->tanggal_lahir ?? date('Y-m-d'), [
-        'class' => 'form-control',
-        'id' => 'tanggal_lahir',
-    ]) !!}
+    {!! Form::date('tanggal_lahir', $coy->tanggal_lahir ?? date('Y-m-d'), ['class' => 'form-control','id'=>'tanggal_lahir']) !!}
+    @error('tanggal_lahir') 
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    
 </div>
 
 @push('page_scripts')
@@ -26,20 +32,24 @@
 <div class="form-group col-sm-6 mb-2">
     {!! Form::label('tinggi', 'Tinggi:') !!}
     {!! Form::number('tinggi', null, ['class' => 'form-control', 'required']) !!}
-    @error('tinggi')
+    @error('tinggi') 
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror
+    
 </div>
 
+
+
 <!-- Penjelasan Field -->
-<div class="form-group col-sm-12 col-lg-12">
+<div class="form-group col-sm-12 col-lg-12 mb-2">
     {!! Form::label('penjelasan', 'Penjelasan:') !!}
-    {!! Form::textarea('penjelasan', null, [
-        'class' => 'form-control',
-        'required',
-        'maxlength' => 65535,
-        'maxlength' => 65535,
-    ]) !!}
+    {!! Form::textarea('penjelasan', null, ['class' => 'form-control', 'required', 'maxlength' => 65535, 'maxlength' => 65535]) !!}
+    @error('penjelasan') 
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    
 </div>

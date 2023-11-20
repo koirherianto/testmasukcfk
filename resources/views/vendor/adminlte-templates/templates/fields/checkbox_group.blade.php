@@ -11,4 +11,9 @@
     @{!! Form::label('{{ $fieldName }}', '{{ $fieldTitle }}:') !!}
 @endif
     {!! $checkboxes !!}
+    @@error('{{ $fieldName }}') @verbatim
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror @endverbatim
 </div>

@@ -24,7 +24,7 @@ class Coy extends Model
     public static array $rules = [
         'nama' => 'required|string|max:11',
         'tanggal_lahir' => 'required',
-        'tinggi' => 'required|min:10',
+        'tinggi' => 'required',
         'penjelasan' => 'required|string|max:65535',
         'created_at' => 'nullable',
         'updated_at' => 'nullable'

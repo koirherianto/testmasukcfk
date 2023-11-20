@@ -8,4 +8,9 @@
         @{!! Form::label('{{ $fieldName }}', '{{ $fieldTitle }}:', ['class' => 'custom-control-label']) !!}
 @endif
     </div>
+    @@error('{{ $fieldName }}') @verbatim
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror @endverbatim
 </div>

@@ -6,6 +6,11 @@
     @{!! Form::label('{{ $fieldName }}', '{{ $fieldTitle }}:') !!}
 @endif
     @{!! Form::date('{{ $fieldName }}', ${{ $config->modelNames->camel }}->{{ $fieldName }} ?? date('Y-m-d'), ['class' => 'form-control','id'=>'{{ $fieldName }}']) !!}
+    @@error('{{ $fieldName }}') @verbatim
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror @endverbatim
 </div>
 
 @@push('page_scripts')

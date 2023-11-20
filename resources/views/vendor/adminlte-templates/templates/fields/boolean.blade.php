@@ -9,4 +9,9 @@
     @{!! Form::checkbox('{{ $fieldName }}', 1, true) !!}
     <!-- remove {, true} to make it unchecked by default -->
     </label>
+    @@error('{{ $fieldName }}') @verbatim
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror @endverbatim
 </div>
