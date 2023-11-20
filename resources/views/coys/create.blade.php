@@ -16,28 +16,27 @@
 @section('content')
 
 
-        @include('adminlte-templates::common.errors')
+    @include('adminlte-templates::common.errors')
 
-        <div class="card">
+    <div class="card">
 
-            {!! Form::open(['route' => 'coys.store']) !!}
+        {!! Form::open(['route' => 'coys.store']) !!}
 
-            <div class="card-body">
+        <div class="card-body">
 
-                <div class="row">
-                    @include('coys.fields')
-                </div>
-
+            <div class="row">
+                @include('coys.fields')
             </div>
-
-            <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('coys.index') }}" class="btn btn-default"> Cancel </a>
-            </div>
-
-            {!! Form::close() !!}
 
         </div>
+
+        <div class="card-footer">
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            <a href="{{ route('coys.index') }}" class="btn btn-default"> Cancel </a>
+        </div>
+
+        {!! Form::close() !!}
+
     </div>
 @endsection
 
