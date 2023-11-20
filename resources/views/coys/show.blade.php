@@ -1,31 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
+@section('title')
+        Coy Details
+    @endsection
+
+@section('page-title')
+    
+    Coy Details
+@endsection
+
+@section('body')
+    <body>
+@endsection
 
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>
-Coy Details
-                    </h1>
-                </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-default float-right"
-                       href="{{ route('coys.index') }}">
-                                                    Back
-                                            </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <div class="content px-3">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     @include('coys.show_fields')
                 </div>
             </div>
+            <a class="btn btn-default" href="{{ route('coys.index') }}">
+                Back
+                </a>
         </div>
-    </div>
+
 @endsection
+
+@section('scripts')
+    
+    {{-- apexcharts --}}
+    <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+    {{-- dashboard-sales.init.js --}}
+    <script src="{{ URL::asset('build/js/pages/dashboard-sales.init.js') }}"></script>
+    {{-- App js --}}
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    
+@endsection
+    
