@@ -17,7 +17,7 @@
 @endpush
 
 <!-- Tinggi Field -->
-<div class="form-group col-sm-6 mt-1">
+<div class="form-group col-sm-6">
     {!! Form::label('tinggi', 'Tinggi:') !!}
     {!! Form::number('tinggi', null, ['class' => 'form-control', 'required']) !!}
 </div>

@@ -1,23 +1,28 @@
-@@extends('layouts.app')
+@@extends('layouts.master')
+
+@@section('title')
+    @if($config->options->localized)
+    @@lang('crud.create') @@lang('models/{!! $config->modelNames->camelPlural !!}.singular')
+    @else
+    Create {{ $config->modelNames->humanPlural }}
+    @endif
+@@endsection
+
+@@section('page-title')
+    
+@if($config->options->localized)
+    @@lang('crud.create') @@lang('models/{!! $config->modelNames->camelPlural !!}.singular')
+    @else
+    Create {{ $config->modelNames->humanPlural }}
+    @endif
+@@endsection
+
+@@section('body')
+    <body>
+@@endsection
 
 @@section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1>
-@if($config->options->localized)
-                    @@lang('crud.create') @@lang('models/{!! $config->modelNames->camelPlural !!}.singular')
-@else
-                    Create {{ $config->modelNames->humanPlural }}
-@endif
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <div class="content px-3">
 
         @@include('adminlte-templates::common.errors')
 
@@ -43,3 +48,15 @@
         </div>
     </div>
 @@endsection
+
+@@section('scripts')
+    @verbatim
+    {{-- apexcharts --}}
+    <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+    {{-- dashboard-sales.init.js --}}
+    <script src="{{ URL::asset('build/js/pages/dashboard-sales.init.js') }}"></script>
+    {{-- App js --}}
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    @endverbatim
+@@endsection
+    

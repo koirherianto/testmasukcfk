@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-    Coys
-@endsection
+        Create Coys
+    @endsection
 
 @section('page-title')
-    Coys
-@endsection
+    
+    Create Coys
+    @endsection
 
 @section('body')
     <body>
@@ -22,7 +23,7 @@
             {!! Form::open(['route' => 'coys.store']) !!}
 
             <div class="card-body">
-                
+
                 <div class="row">
                     @include('coys.fields')
                 </div>
@@ -37,6 +38,7 @@
             {!! Form::close() !!}
 
         </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -49,5 +51,4 @@
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
     
 @endsection
-
     
