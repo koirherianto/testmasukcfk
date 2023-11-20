@@ -29,13 +29,9 @@
                     @@include('{{ $config->prefixes->getViewPrefixForInclude() }}{{ $config->modelNames->snakePlural }}.show_fields')
                 </div>
             </div>
-            <a class="btn btn-default" href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural  !!}.index') }}">
-                @if($config->options->localized)
-@@lang('crud.back')
-                @else
-Back
-                @endif
-</a>
+            <div class="card-footer">
+                <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.index') }}" class="btn btn-default">@if($config->options->localized) @@lang('crud.cancel') @else Cancel @endif</a>
+            </div>
         </div>
 
 @@endsection

@@ -21,9 +21,9 @@
                     @include('coys.show_fields')
                 </div>
             </div>
-            <a class="btn btn-default" href="{{ route('coys.index') }}">
-                Back
-                </a>
+            <div class="card-footer">
+                <a href="{{ route('coys.index') }}" class="btn btn-default"> Cancel </a>
+            </div>
         </div>
 
 @endsection

@@ -15,7 +15,6 @@
 
 @section('content')
 
-
     @include('adminlte-templates::common.errors')
 
     <div class="card">
