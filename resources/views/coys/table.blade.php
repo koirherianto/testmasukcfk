@@ -1,23 +1,14 @@
 <div class="card">
     <div class="card-body">
-    <div class="d-flex flex-wrap align-items-center mb-2">
-        <h5 class="card-title">Products Of The Month</h5>
+        <div class="d-flex flex-wrap align-items-center mb-2">
+            <h5 class="card-title">
+                Coys 
+                </h5>
         <div class="ms-auto">
             <div class="dropdown">
-                {{-- <a class="dropdown-toggle text-reset" href="#" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="text-muted font-size-12">Sort By: </span> <span class="fw-medium">
-                        Monthly<i class="mdi mdi-chevron-down ms-1"></i></span>
-                </a> --}}
-                <a class="btn btn-primary "
-                       href="{{ route('coys.create') }}">
-                        Add New
-                    </a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <a class="dropdown-item" href="#">Weekly</a>
-                    <a class="dropdown-item" href="#">Monthly</a>
-                    <a class="dropdown-item" href="#">Yearly</a>
-                </div>
+                <a class="btn btn-primary float-right" href="{{ route('coys.create') }}">
+                       Tambah Data
+                        </a>
             </div>
         </div>
     </div>
@@ -29,9 +20,8 @@
                 <th>Tanggal Lahir</th>
                 <th>Tinggi</th>
                 <th>Penjelasan</th>
-                <th>Action</th>
-                                                <th colspan="3">Action</th>
-                            </tr>
+                <th colspan="3">Action</th>
+                </tr>
             </thead>
             <tbody>
             @foreach($coys as $coy)
@@ -40,20 +30,7 @@
                     <td>{{ $coy->tanggal_lahir }}</td>
                     <td>{{ $coy->tinggi }}</td>
                     <td>{{ $coy->penjelasan }}</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="text-muted dropdown-toggle font-size-18" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Print</a>
-                                <a class="dropdown-item" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td  style="width: 120px">
+                    <td style="width: 120px">
                         {!! Form::open(['route' => ['coys.destroy', $coy->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             <a href="{{ route('coys.show', [$coy->id]) }}"
@@ -68,7 +45,21 @@
                         </div>
                         {!! Form::close() !!}
                     </td>
-                    
+                    <td>
+                        <div class="dropdown">
+                            <a class="text-muted dropdown-toggle font-size-18" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true">
+                                <i class="mdi mdi-dots-horizontal"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="{{ route('coys.edit', [$coy->id]) }}">Edit</a>
+                                <a class="dropdown-item" href="{{ route('coys.show', [$coy->id]) }}">Detail</a>
+                                {!! Form::open(['route' => ['coys.destroy', $coy->id], 'method' => 'delete']) !!}
+                                {!! Form::button('Delete', ['type' => 'submit', 'class' => 'dropdown-item', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

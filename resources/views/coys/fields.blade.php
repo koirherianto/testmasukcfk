@@ -6,7 +6,7 @@
 
 <!-- Tanggal Lahir Field -->
 <div class="form-group col-sm-6">
-    {!! Form::date('tanggal_lahir', 'Tanggal Lahir:') !!}
+    {!! Form::label('tanggal_lahir', 'Tanggal Lahir:') !!}
     {!! Form::date('tanggal_lahir', $coys->fieldName ?? date('Y-m-d'), ['class' => 'form-control','id'=>'tanggal_lahir']) !!}
 </div>
 
@@ -17,7 +17,7 @@
 @endpush
 
 <!-- Tinggi Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-6 mt-1">
     {!! Form::label('tinggi', 'Tinggi:') !!}
     {!! Form::number('tinggi', null, ['class' => 'form-control', 'required']) !!}
 </div>

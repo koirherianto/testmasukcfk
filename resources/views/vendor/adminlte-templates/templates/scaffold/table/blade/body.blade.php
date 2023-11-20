@@ -1,34 +1,22 @@
 <div class="card">
     <div class="card-body">
-    <div class="d-flex flex-wrap align-items-center mb-2">
-        <h5 class="card-title">
-            @if($config->options->localized)
-                @@lang('models/{{ $config->modelNames->camelPlural }}.plural')
-            @else
-                {{ $config->modelNames->humanPlural }}
-            @endif
-            </h5>
+        <div class="d-flex flex-wrap align-items-center mb-2">
+            <h5 class="card-title">
+                @if($config->options->localized)
+@lang('models/{{ $config->modelNames->camelPlural }}.plural')
+                @else
+{{ $config->modelNames->humanPlural }} 
+                @endif
+</h5>
         <div class="ms-auto">
             <div class="dropdown">
-                {{-- <a class="dropdown-toggle text-reset" href="#" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="text-muted font-size-12">Sort By: </span> <span class="fw-medium">
-                        Monthly<i class="mdi mdi-chevron-down ms-1"></i></span>
-                </a> --}}
-
-                <a class="btn btn-primary float-right"
-                href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.create') }}">
+                <a class="btn btn-primary float-right" href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.create') }}">
                        @if($config->options->localized)
-                       @@lang('crud.add_new')
+@@lang('crud.add_new')
                         @else
-                        Tambah Data
+Tambah Data
                         @endif
-                        </a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <a class="dropdown-item" href="#">Weekly</a>
-                    <a class="dropdown-item" href="#">Monthly</a>
-                    <a class="dropdown-item" href="#">Yearly</a>
-                </div>
+</a>
             </div>
         </div>
     </div>
@@ -38,17 +26,17 @@
             <tr>
                 {!! $fieldHeaders !!}
                 @if($config->options->localized)
-                                <th colspan="3">@lang('crud.action')</th>
+<th colspan="3">@lang('crud.action')</th>
                 @else
-                                <th colspan="3">Action</th>
+<th colspan="3">Action</th>
                 @endif
-            </tr>
+</tr>
             </thead>
             <tbody>
             @@foreach(${{ $config->modelNames->camelPlural }} as ${{ $config->modelNames->camel }})
                 <tr>
                     {!! $fieldBody !!}
-                    <td  style="width: 120px">
+                    <td style="width: 120px">
                         @{!! Form::open(['route' => ['{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.destroy', ${{ $config->modelNames->camel }}->{{ $config->primaryName }}], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.show', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}"
@@ -70,9 +58,11 @@
                                 <i class="mdi mdi-dots-horizontal"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Print</a>
-                                <a class="dropdown-item" href="#">Delete</a>
+                                <a class="dropdown-item" href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.edit', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}">Edit</a>
+                                <a class="dropdown-item" href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.show', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}">Detail</a>
+                                @{!! Form::open(['route' => ['{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.destroy', ${{ $config->modelNames->camel }}->{{ $config->primaryName }}], 'method' => 'delete']) !!}
+                                @{!! Form::button('Delete', ['type' => 'submit', 'class' => 'dropdown-item', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                                @{!! Form::close() !!}
                             </div>
                         </div>
                     </td>

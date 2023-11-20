@@ -1,19 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
+@section('title')
+    Coys
+@endsection
+
+@section('page-title')
+    Coys
+@endsection
+
+@section('body')
+    <body>
+@endsection
 
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1>
-                    Create Coys
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <div class="content px-3">
 
         @include('adminlte-templates::common.errors')
 
@@ -22,7 +22,7 @@
             {!! Form::open(['route' => 'coys.store']) !!}
 
             <div class="card-body">
-
+                
                 <div class="row">
                     @include('coys.fields')
                 </div>
@@ -37,5 +37,17 @@
             {!! Form::close() !!}
 
         </div>
-    </div>
 @endsection
+
+@section('scripts')
+    
+    {{-- apexcharts --}}
+    <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
+    {{-- dashboard-sales.init.js --}}
+    <script src="{{ URL::asset('build/js/pages/dashboard-sales.init.js') }}"></script>
+    {{-- App js --}}
+    <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    
+@endsection
+
+    

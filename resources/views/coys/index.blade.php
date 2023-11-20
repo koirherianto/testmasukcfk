@@ -1,29 +1,30 @@
 @extends('layouts.master')
+
 @section('title')
-Coys
+    Coys
 @endsection
+
 @section('page-title')
-Coys
+    Coys
 @endsection
+
 @section('body')
-
-<body>
+    <body>
 @endsection
+
 @section('content')
-
     @include('flash::message')
-    <div class="card">
-        @include('coys.table')
-    </div>
-
+    @include('coys.table')
 @endsection
+
 @section('scripts')
-    <!-- apexcharts -->
+    
+    {{-- apexcharts --}}
     <script src="{{ URL::asset('build/libs/apexcharts/apexcharts.min.js') }}"></script>
-
+    {{-- dashboard-sales.init.js --}}
     <script src="{{ URL::asset('build/js/pages/dashboard-sales.init.js') }}"></script>
-
-    <!-- App js -->
+    {{-- App js --}}
     <script src="{{ URL::asset('build/js/app.js') }}"></script>
+    
 @endsection
 
