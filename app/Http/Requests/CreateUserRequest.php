@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Kucing;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateKucingRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreateKucingRequest extends FormRequest
      */
     public function rules()
     {
-        return Kucing::$rules;
+        return User::$rules;
     }
 }

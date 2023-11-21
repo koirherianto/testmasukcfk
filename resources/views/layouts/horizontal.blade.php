@@ -201,8 +201,8 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end pt-0">
                     <div class="p-3 border-bottom">
-                        <h6 class="mb-0">Martin Gurley</h6>
-                        <p class="mb-0 font-size-11 text-muted">martin.gurley@email.com</p>
+                        <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                        <p class="mb-0 font-size-11 text-muted">{{ Auth::user()->email }}</p>
                     </div>
                     <a class="dropdown-item" href="contacts-profile"><i
                             class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i> <span

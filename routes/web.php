@@ -27,6 +27,7 @@ Auth::routes();
 
 Route::resource('coys', App\Http\Controllers\CoyController::class);
 Route::resource('kucings', App\Http\Controllers\KucingController::class);
+Route::resource('users', App\Http\Controllers\UserController::class);
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 

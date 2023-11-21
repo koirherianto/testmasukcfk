@@ -6,7 +6,7 @@
     </a>
 </li> --}}
 
-<li>
+{{-- <li>
     <a href={{ route('homex') }}>
         <i class="bx bx-calendar-event icon nav-icon"></i>
         <span class="menu-item" data-key="t-calendar">Home</span>
@@ -272,7 +272,7 @@
             </ul>
         </li>
     </ul>
-</li>
+</li> --}}
 
 <li>
     <a href="{{ route('kucings.index') }}">
@@ -286,4 +286,18 @@
         <i class="bx bx-calendar-event icon nav-icon"></i>
         <span class="menu-item">Coys</span>
     </a>
+</li>
+
+<li>
+    <a href="{{ route('kucings.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">Kucings</span>
+        </a>
+</li>
+
+<li>
+    <a href="{{ route('users.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">Users</span>
+        </a>
 </li>

@@ -47,7 +47,7 @@
                                     class="avatar-xl rounded-circle img-thumbnail">
 
                                 <div class="mt-3">
-                                    <h5 class="mb-1">Martin Gurley</h5>
+                                    <h5 class="mb-1">{{ Auth::user()->name }}</h5>
                                     <p class="text-muted mb-0">
                                         <i class="bx bxs-star text-warning font-size-14"></i>
                                         <i class="bx bxs-star text-warning font-size-14"></i>
@@ -65,20 +65,20 @@
                                     <tbody>
                                         <tr>
                                             <th class="fw-bold">
-                                                City :</th>
-                                            <td class="text-muted">New Your City</td>
+                                                Name :</th>
+                                            <td class="text-muted">{{ Auth::user()->name }}</td>
                                         </tr>
                                         <!-- end tr -->
                                         <tr>
                                             <th class="fw-bold">
-                                                State :</th>
-                                            <td class="text-muted">New Your</td>
+                                                Email :</th>
+                                            <td class="text-muted">{{ Auth::user()->email }}</td>
                                         </tr>
                                         <!-- end tr -->
                                         <tr>
                                             <th class="fw-bold">
-                                                Country :</th>
-                                            <td class="text-muted">USA</td>
+                                                Terdaftar Pada :</th>
+                                            <td class="text-muted">{{ Auth::user()->created_at }}</td>
                                         </tr>
                                         <!-- end tr -->
                                         <tr>
