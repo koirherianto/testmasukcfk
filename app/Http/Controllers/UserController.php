@@ -181,4 +181,17 @@ class UserController extends AppBaseController
         Flash::success('Password updated successfully.');
         return redirect()->route('profile');
     }
+
+    function updateFotoProfile(Request $request) {
+        $user = Auth::user();
+        
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $user->clearMediaCollection('foto');
+            $user->addMedia($file)->toMediaCollection('foto');
+        }
+
+        Flash::success('Foto profile updated successfully.');
+        return redirect()->route('profile');
+    }
 }
