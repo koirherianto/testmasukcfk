@@ -24,6 +24,8 @@ class CreateUserRequest extends FormRequest
      */
     public function rules()
     {
-        return User::$rules;
+        $rules = User::$rules;
+        unset($rules['email_verified_at']);
+        return $rules;
     }
 }

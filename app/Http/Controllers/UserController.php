@@ -46,7 +46,7 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-
+        unset($input['email_verified_at']);
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
@@ -94,6 +94,14 @@ class UserController extends AppBaseController
             Flash::error('User not found');
             return redirect(route('users.index'));
         }
+
+        // apakah password kosong
+        if (empty($request->password)) {
+            unset($request['password']);
+        }
+
+        unset($request['remember_token']);
+        unset($request['email_verified_at']);
 
         $user = $this->userRepository->update($request->all(), $id);
 

@@ -25,6 +25,8 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         $rules = User::$rules;
+
+        unset($rules['password']);
         
         return $rules;
     }

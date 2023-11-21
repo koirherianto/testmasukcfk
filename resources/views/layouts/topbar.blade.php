@@ -27,17 +27,6 @@
                 <i class="bx bx-menu align-middle"></i>
             </button>
 
-            {{-- <script>
-                // Simulasikan klik pada tombol saat halaman dimuat
-                document.addEventListener("DOMContentLoaded", function () {
-                    var button = document.getElementById("autoClickButton");
-                    if (button) {
-                        button.click(); // Simulasi klik pada tombol
-                    }
-                });
-            </script> --}}
-
-            
             <!-- start page title -->
             <div class="page-title-box align-self-center d-none d-md-block">
                 <h4 class="page-title mb-0">@yield('page-title')</h4>
@@ -62,7 +51,7 @@
                             height="12"> <span class="align-middle">English</span>
                     </a>
 
-                    <!-- item-->
+                    {{-- <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="sp">
                         <img src="{{ URL::asset('build/images/flags/spain.jpg') }}" alt="user-image" class="me-1"
                             height="12"> <span class="align-middle">Spanish</span>
@@ -84,11 +73,12 @@
                     <a href="javascript:void(0);" class="dropdown-item notify-item language" data-lang="ru">
                         <img src="{{ URL::asset('build/images/flags/russia.jpg') }}" alt="user-image" class="me-1"
                             height="12"> <span class="align-middle">Russian</span>
-                    </a>
+                    </a> --}}
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block">
+            {{-- tombol search topbar --}}
+            {{-- <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <i class="bx bx-search icon-sm align-middle"></i>
@@ -104,9 +94,10 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="dropdown d-inline-block">
+            {{-- tombol notifikasi top bar --}}
+            {{-- <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon" id="page-header-notifications-dropdown-v"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bx bx-bell icon-sm align-middle"></i>
@@ -142,54 +133,6 @@
 
                             </div>
                         </a>
-                        <a href="#!" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 avatar-sm me-3">
-                                    <span class="avatar-title bg-primary rounded-circle font-size-18">
-                                        <i class="bx bx-cart"></i>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <p class="text-muted font-size-13 mb-0 float-end">3 min ago</p>
-                                    <h6 class="mb-1">Your order is placed</h6>
-                                    <div>
-                                        <p class="mb-0">If several languages coalesce the grammar</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#!" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 avatar-sm me-3">
-                                    <span class="avatar-title bg-success rounded-circle font-size-18">
-                                        <i class="bx bx-badge-check"></i>
-                                    </span>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <p class="text-muted font-size-13 mb-0 float-end">8 min ago</p>
-                                    <h6 class="mb-1">Your item is shipped</h6>
-                                    <div>
-                                        <p class="mb-0">If several languages coalesce the grammar</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="#!" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <img src="{{ URL::asset('build/images/users/avatar-6.jpg') }}"
-                                        class="rounded-circle avatar-sm" alt="user-pic">
-                                </div>
-                                <div class="flex-grow-1">
-                                    <p class="text-muted font-size-13 mb-0 float-end">1 hour ago</p>
-                                    <h6 class="mb-1">Salena Layfield</h6>
-                                    <div>
-                                        <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
                     </div>
                     <div class="p-2 border-top d-grid">
                         <a class="btn btn-sm btn-link font-size-14 btn-block text-center" href="javascript:void(0)">
@@ -197,14 +140,14 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item user text-start d-flex align-items-center"
                     id="page-header-user-dropdown-v" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <img class="rounded-circle header-profile-user"
-                        src="{{ $user->getFirstMediaUrl('foto') ?: asset('build/images/users/avatar-3.jpg') }}" alt="Header Avatar">
+                        src="{{ Auth::user()->getFirstMediaUrl('foto') ?: asset('build/images/users/avatar-3.jpg') }}" alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-2 fw-medium font-size-15">{{ Auth::user()->name }}</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end pt-0">
@@ -212,16 +155,16 @@
                         <h6 class="mb-0">{{ Auth::user()->name }}</h6>
                         <p class="mb-0 font-size-11 text-muted">{{ Auth::user()->email }}</p>
                     </div>
-                    <a class="dropdown-item" href="contacts-profile"><i
+                    <a class="dropdown-item" href="{{ route('edit.profile') }}"><i
                             class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i> <span
                             class="align-middle">Profile</span></a>
-                    <a class="dropdown-item" href="apps-chat"><i
+                    {{-- <a class="dropdown-item" href="apps-chat"><i
                             class="mdi mdi-message-text-outline text-muted font-size-16 align-middle me-2"></i> <span
-                            class="align-middle">Messages</span></a>
-                    <a class="dropdown-item" href="pages-faqs"><i
+                            class="align-middle">Messages</span></a> --}}
+                    {{-- <a class="dropdown-item" href="pages-faqs"><i
                             class="mdi mdi-lifebuoy text-muted font-size-16 align-middle me-2"></i> <span
-                            class="align-middle">Help</span></a>
-                    <a class="dropdown-item d-flex align-items-center" href="#"><i
+                            class="align-middle">Help</span></a> --}}
+                    <a class="dropdown-item d-flex align-items-center" href="{{ route('edit.profile') }}"><i
                             class="mdi mdi-cog-outline text-muted font-size-16 align-middle me-2"></i> <span
                             class="align-middle me-3">Settings</span><span
                             class="badge badge-soft-success ms-auto">New</span></a>
