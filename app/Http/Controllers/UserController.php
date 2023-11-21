@@ -7,7 +7,10 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use Flash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends AppBaseController
 {
@@ -116,5 +119,66 @@ class UserController extends AppBaseController
 
         Flash::success('User deleted successfully.');
         return redirect(route('users.index'));
+    }
+
+    public function profile() {
+        $user = Auth::user();
+        return view('users.profile.profile', compact('user'));
+    }
+    
+    public function editProfile() {
+        $user = Auth::user();
+        return view('users.profile.edit', compact('user'));
+    }
+
+    public function updateProfile(Request $request) {
+        $user = Auth::user();
+        // Use the validate method to get a Validator instance
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email:rfc,dns',
+        ]);
+
+        if ($validator->fails()) {
+            // Use the errors() method to get the error messages
+            $errors = $validator->errors();
+    
+            Flash::error('Profile updated failed: ' . $errors->first());
+            return redirect()->route('edit.profile');
+        }
+
+
+        unset($request['password']);
+        $user->update($request->all());
+
+        Flash::success('Profile updated successfully.');
+        return redirect()->route('profile');
+    }
+
+    function updatePassword(Request $request) {
+        $user = Auth::user();
+        // $user->update(['password' => bcrypt('12345678')]);
+        $validator = Validator::make($request->all(), [
+            'password_lama' => 'required',
+            'password_baru' => 'required',
+            'password_confirm' => 'required|same:password_baru'
+        ]);
+    
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+    
+            Flash::error('Password updated failed: ' . $errors->first());
+            return redirect()->route('edit.profile');
+        }
+
+        if (!Hash::check($request->password_lama, $user->password)) {
+            Flash::error('Password lama tidak sesuai.');
+            return redirect()->route('edit.profile');
+        }
+
+        $user->update(['password' => bcrypt($request->password_baru)]);
+
+        Flash::success('Password updated successfully.');
+        return redirect()->route('profile');
     }
 }

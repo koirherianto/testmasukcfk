@@ -26,6 +26,9 @@ Auth::routes();
 
 
 Route::get('profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+Route::get('editProfile', [App\Http\Controllers\UserController::class, 'editProfile'])->name('edit.profile');
+Route::post('updateProfile', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('update.profile');
+Route::post('updatePassword', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('update.password');
 Route::resource('coys', App\Http\Controllers\CoyController::class);
 Route::resource('kucings', App\Http\Controllers\KucingController::class);
 Route::resource('users', App\Http\Controllers\UserController::class);
