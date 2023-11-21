@@ -301,3 +301,10 @@
         <span class="menu-item">Roles</span>
         </a>
 </li>
+
+<li>
+    <a href="{{ route('permissions.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">Permissions</span>
+        </a>
+</li>

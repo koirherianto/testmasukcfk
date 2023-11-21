@@ -38,3 +38,5 @@ Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 
+
+Route::resource('permissions', App\Http\Controllers\PermissionController::class);
