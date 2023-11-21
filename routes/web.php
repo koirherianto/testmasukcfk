@@ -34,6 +34,7 @@ Route::post('updateFotoProfile', [UserController::class, 'updateFotoProfile'])->
 Route::resource('coys', App\Http\Controllers\CoyController::class);
 Route::resource('kucings', App\Http\Controllers\KucingController::class);
 Route::resource('users', UserController::class);
+Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 
