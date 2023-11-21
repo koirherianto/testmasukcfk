@@ -21,7 +21,7 @@ Tambah Data
         </div>
     </div>
     <div class="table-responsive">
-        <table id="{{ $config->modelNames->dashedPlural }}-table" class="table table-striped table-centered align-middle table-nowrap mb-0 table-check">
+        <table id="data-table" class="table table-striped table-centered align-middle table-nowrap mb-0 table-check">
             <thead>
             <tr>
                 {!! $fieldHeaders !!}

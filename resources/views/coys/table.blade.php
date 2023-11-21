@@ -13,14 +13,14 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table id="coys-table" class="table table-striped table-centered align-middle table-nowrap mb-0 table-check">
+        <table id="data-table" class="table table-striped table-centered align-middle table-nowrap mb-0 table-check">
             <thead>
             <tr>
                 <th>Nama</th>
                 <th>Tanggal Lahir</th>
                 <th>Tinggi</th>
                 <th>Penjelasan</th>
-                <th colspan="3">Action</th>
+                <th >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,21 +45,7 @@
                         </div>
                         {!! Form::close() !!}
                     </td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="text-muted dropdown-toggle font-size-18" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="{{ route('coys.edit', [$coy->id]) }}">Edit</a>
-                                <a class="dropdown-item" href="{{ route('coys.show', [$coy->id]) }}">Detail</a>
-                                {!! Form::open(['route' => ['coys.destroy', $coy->id], 'method' => 'delete']) !!}
-                                {!! Form::button('Delete', ['type' => 'submit', 'class' => 'dropdown-item', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                                {!! Form::close() !!}
-                            </div>
-                        </div>
-                    </td>
+                   
                 </tr>
             @endforeach
             </tbody>

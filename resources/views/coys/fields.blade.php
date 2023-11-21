@@ -6,8 +6,7 @@
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-    @enderror
-    
+    @enderror 
 </div>
 
 <!-- Tanggal Lahir Field -->
@@ -18,8 +17,7 @@
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-    @enderror
-    
+    @enderror 
 </div>
 
 @push('page_scripts')
@@ -36,11 +34,8 @@
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-    @enderror
-    
+    @enderror 
 </div>
-
-
 
 <!-- Penjelasan Field -->
 <div class="form-group col-sm-12 col-lg-12 mb-2">
@@ -50,6 +45,5 @@
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-    @enderror
-    
+    @enderror 
 </div>
