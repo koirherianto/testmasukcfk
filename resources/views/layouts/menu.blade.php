@@ -274,19 +274,7 @@
     </ul>
 </li> --}}
 
-<li>
-    <a href="{{ route('coys.index') }}">
-        <i class="bx bx-calendar-event icon nav-icon"></i>
-        <span class="menu-item">Coys</span>
-    </a>
-</li>
-
-<li>
-    <a href="{{ route('kucings.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
-        <span class="menu-item">Kucings</span>
-        </a>
-</li>
+<li class="menu-title" >Admin</li>
 
 <li>
     <a href="{{ route('users.index') }}">
@@ -308,3 +296,20 @@
         <span class="menu-item">Permissions</span>
         </a>
 </li>
+
+<li class="menu-title">User</li>
+
+<li>
+    <a href="{{ route('coys.index') }}">
+        <i class="bx bx-calendar-event icon nav-icon"></i>
+        <span class="menu-item">Coys</span>
+    </a>
+</li>
+
+<li>
+    <a href="{{ route('kucings.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">Kucings</span>
+        </a>
+</li>
+
