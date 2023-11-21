@@ -47,7 +47,6 @@ class {{ $config->modelNames->name }}Controller extends AppBaseController
         ${{ $config->modelNames->camel }} = $this->{{ $config->modelNames->camel }}Repository->create($input);
 
         @include('laravel-generator::scaffold.controller.messages.save_success')
-
         return redirect(route('{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.index'));
     }
 
@@ -57,7 +56,7 @@ class {{ $config->modelNames->name }}Controller extends AppBaseController
     public function show($id)
     {
         ${{ $config->modelNames->camel }} = $this->{{ $config->modelNames->camel }}Repository->find($id);
-
+        
         @include('laravel-generator::scaffold.controller.messages.not_found')
 
         return view('{{ $config->prefixes->getViewPrefixForInclude() }}{{ $config->modelNames->snakePlural }}.show')->with('{{ $config->modelNames->camel }}', ${{ $config->modelNames->camel }});
@@ -87,7 +86,6 @@ class {{ $config->modelNames->name }}Controller extends AppBaseController
         ${{ $config->modelNames->camel }} = $this->{{ $config->modelNames->camel }}Repository->update($request->all(), $id);
 
         @include('laravel-generator::scaffold.controller.messages.update_success')
-
         return redirect(route('{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.index'));
     }
 
@@ -105,7 +103,6 @@ class {{ $config->modelNames->name }}Controller extends AppBaseController
         $this->{{ $config->modelNames->camel }}Repository->delete($id);
 
         @include('laravel-generator::scaffold.controller.messages.delete_success')
-
         return redirect(route('{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.index'));
     }
 }

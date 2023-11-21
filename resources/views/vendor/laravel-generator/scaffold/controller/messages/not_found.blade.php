@@ -4,6 +4,5 @@
 @else
             Flash::error('{{ $config->modelNames->human }} not found');
 @endif
-
             return redirect(route('{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.index'));
         }

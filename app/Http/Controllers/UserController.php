@@ -26,8 +26,7 @@ class UserController extends AppBaseController
     {
         $users = $this->userRepository->paginate(10);
 
-        return view('users.index')
-            ->with('users', $users);
+        return view('users.index')->with('users', $users);
     }
 
     /**
@@ -48,7 +47,6 @@ class UserController extends AppBaseController
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
-
         return redirect(route('users.index'));
     }
 
@@ -58,10 +56,9 @@ class UserController extends AppBaseController
     public function show($id)
     {
         $user = $this->userRepository->find($id);
-
+        
         if (empty($user)) {
             Flash::error('User not found');
-
             return redirect(route('users.index'));
         }
 
@@ -77,7 +74,6 @@ class UserController extends AppBaseController
 
         if (empty($user)) {
             Flash::error('User not found');
-
             return redirect(route('users.index'));
         }
 
@@ -93,14 +89,12 @@ class UserController extends AppBaseController
 
         if (empty($user)) {
             Flash::error('User not found');
-
             return redirect(route('users.index'));
         }
 
         $user = $this->userRepository->update($request->all(), $id);
 
         Flash::success('User updated successfully.');
-
         return redirect(route('users.index'));
     }
 
@@ -115,14 +109,12 @@ class UserController extends AppBaseController
 
         if (empty($user)) {
             Flash::error('User not found');
-
             return redirect(route('users.index'));
         }
 
         $this->userRepository->delete($id);
 
         Flash::success('User deleted successfully.');
-
         return redirect(route('users.index'));
     }
 }
