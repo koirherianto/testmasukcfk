@@ -25,6 +25,7 @@ Auth::routes();
 
 
 
+Route::get('profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
 Route::resource('coys', App\Http\Controllers\CoyController::class);
 Route::resource('kucings', App\Http\Controllers\KucingController::class);
 Route::resource('users', App\Http\Controllers\UserController::class);
