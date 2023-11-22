@@ -16,6 +16,10 @@ class KucingController extends AppBaseController
 
     public function __construct(KucingRepository $kucingRepo)
     {
+        $this->middleware('permission:kucing.index', ['only' => ['index','show']]);
+        $this->middleware('permission:kucing.create', ['only' => ['create','store']]);
+        $this->middleware('permission:kucing.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:kucing.destroy', ['only' => ['destroy']]);
         $this->kucingRepository = $kucingRepo;
     }
 
@@ -26,8 +30,7 @@ class KucingController extends AppBaseController
     {
         $kucings = $this->kucingRepository->paginate(10);
 
-        return view('kucings.index')
-            ->with('kucings', $kucings);
+        return view('kucings.index')->with('kucings', $kucings);
     }
 
     /**
@@ -48,7 +51,6 @@ class KucingController extends AppBaseController
         $kucing = $this->kucingRepository->create($input);
 
         Flash::success('Kucing saved successfully.');
-
         return redirect(route('kucings.index'));
     }
 
@@ -58,10 +60,9 @@ class KucingController extends AppBaseController
     public function show($id)
     {
         $kucing = $this->kucingRepository->find($id);
-
+        
         if (empty($kucing)) {
             Flash::error('Kucing not found');
-
             return redirect(route('kucings.index'));
         }
 
@@ -77,7 +78,6 @@ class KucingController extends AppBaseController
 
         if (empty($kucing)) {
             Flash::error('Kucing not found');
-
             return redirect(route('kucings.index'));
         }
 
@@ -93,14 +93,12 @@ class KucingController extends AppBaseController
 
         if (empty($kucing)) {
             Flash::error('Kucing not found');
-
             return redirect(route('kucings.index'));
         }
 
         $kucing = $this->kucingRepository->update($request->all(), $id);
 
         Flash::success('Kucing updated successfully.');
-
         return redirect(route('kucings.index'));
     }
 
@@ -115,14 +113,12 @@ class KucingController extends AppBaseController
 
         if (empty($kucing)) {
             Flash::error('Kucing not found');
-
             return redirect(route('kucings.index'));
         }
 
         $this->kucingRepository->delete($id);
 
         Flash::success('Kucing deleted successfully.');
-
         return redirect(route('kucings.index'));
     }
 }

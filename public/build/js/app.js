@@ -124,7 +124,9 @@ File: Main Js File
         var currentSIdebarSize = document.body.getAttribute('data-sidebar-size');
         window.onload = function () {
             if (window.innerWidth >= 1024 && window.innerWidth <= 1366) {
-                document.body.setAttribute('data-sidebar-size', 'sm');
+                // ini dirubah ke lg
+                document.body.setAttribute('data-sidebar-size', 'lg');
+                // document.body.setAttribute('data-sidebar-size', 'sm');
                 updateRadio('sidebar-size-small');
             }
         };

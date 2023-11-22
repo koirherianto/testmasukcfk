@@ -1,3 +1,4 @@
+@@can('{!! $config->modelNames->camel !!}.index')
 <li>
     <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.
     ') !!}{!! $config->modelNames->camelPlural !!}.index') }}">
@@ -9,3 +10,4 @@
         @endif
 </a>
 </li>
+@@endcan

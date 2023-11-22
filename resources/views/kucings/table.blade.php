@@ -3,12 +3,12 @@
         <div class="d-flex flex-wrap align-items-center mb-2">
             <h5 class="card-title">
                 Kucings 
-                </h5>
+            </h5>
         <div class="ms-auto">
             <div class="dropdown">
-                <a class="btn btn-primary float-right" href="{{ route('kucings.create') }}">
-                       Tambah Data
-                        </a>
+                @can('kucing.index')
+                <a href="{{ route('kucings.create') }}" class="btn btn-primary float-right"> Tambah Data </a>
+                @endcan
             </div>
         </div>
     </div>
@@ -33,15 +33,19 @@
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['kucings.destroy', $kucing->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            <a href="{{ route('kucings.show', [$kucing->id]) }}"
-                               class='btn btn-primary btn-xs'>
+                            @can('kucing.index')
+                            <a href="{{ route('kucings.show', [$kucing->id]) }}" class='btn btn-primary btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
-                            <a href="{{ route('kucings.edit', [$kucing->id]) }}"
-                               class='btn btn-warning btn-xs'>
+                            @endcan
+                            @can('kucing.edit')
+                            <a href="{{ route('kucings.edit', [$kucing->id]) }}" class='btn btn-warning btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
+                            @endcan
+                            @can('kucing.destroy')
                             {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            @endcan
                         </div>
                         {!! Form::close() !!}
                     </td>

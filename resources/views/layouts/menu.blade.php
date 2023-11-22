@@ -278,39 +278,32 @@
 
 <li>
     <a href="{{ route('users.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
+        <i class="bx bx-user icon nav-icon"></i>
         <span class="menu-item">Users</span>
-        </a>
+    </a>
 </li>
 
 <li>
     <a href="{{ route('roles.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
+        <i class="bx bx-lock-open-alt icon nav-icon"></i>
         <span class="menu-item">Roles</span>
-        </a>
+    </a>
 </li>
 
 <li>
     <a href="{{ route('permissions.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
+        <i class="bx bx-shield icon nav-icon"></i>
         <span class="menu-item">Permissions</span>
-        </a>
+    </a>
 </li>
 
 <li class="menu-title">User</li>
 
-<li>
-    <a href="{{ route('coys.index') }}">
-        <i class="bx bx-calendar-event icon nav-icon"></i>
-        <span class="menu-item">Coys</span>
-    </a>
-</li>
-
+@can('kucing.index')
 <li>
     <a href="{{ route('kucings.index') }}">
         <i class="bx bx-home-alt icon nav-icon"></i>
         <span class="menu-item">Kucings</span>
         </a>
 </li>
-
-
+@endcan
