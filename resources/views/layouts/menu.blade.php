@@ -314,9 +314,3 @@
 </li>
 
 
-<li>
-    <a href="{{ route('coys.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
-        <span class="menu-item">Coys</span>
-        </a>
-</li>
