@@ -34,18 +34,18 @@
                         {!! Form::open(['route' => ['coys.destroy', $coy->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             @can('coy.index')
-                            <a href="{{ route('coys.show', [$coy->id]) }}"
-                               class='btn btn-primary btn-xs'>
+                            <a href="{{ route('coys.show', [$coy->id]) }}" class='btn btn-primary btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
                             @endcan
                             @can('coy.edit')
-                            <a href="{{ route('coys.edit', [$coy->id]) }}"
-                               class='btn btn-warning btn-xs'>
+                            <a href="{{ route('coys.edit', [$coy->id]) }}" class='btn btn-warning btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
                             @endcan
+                            @can('coy.destroy')
                             {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            @endcan
                         </div>
                         {!! Form::close() !!}
                     </td>

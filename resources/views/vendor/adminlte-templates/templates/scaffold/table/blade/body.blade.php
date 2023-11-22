@@ -35,18 +35,18 @@
                         @{!! Form::open(['route' => ['{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.destroy', ${{ $config->modelNames->camel }}->{{ $config->primaryName }}], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             @@can('{!! $config->modelNames->camel !!}.index')
-                            <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.show', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}"
-                               class='btn btn-primary btn-xs'>
+                            <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.show', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}" class='btn btn-primary btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
                             @@endcan
                             @@can('{!! $config->modelNames->camel !!}.edit')
-                            <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.edit', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}"
-                               class='btn btn-warning btn-xs'>
+                            <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.edit', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}" class='btn btn-warning btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
                             @@endcan
+                            @@can('{!! $config->modelNames->camel !!}.destroy')
                             @{!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            @@endcan
                         </div>
                         @{!! Form::close() !!}
                     </td>
