@@ -16,6 +16,10 @@ class CoyController extends AppBaseController
 
     public function __construct(CoyRepository $coyRepo)
     {
+        $this->middleware('permission:coy.index', ['only' => ['index','show']]);
+        $this->middleware('permission:coy.create', ['only' => ['create','store']]);
+        $this->middleware('permission:coy.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:coy.destroy', ['only' => ['destroy']]);
         $this->coyRepository = $coyRepo;
     }
 
@@ -26,8 +30,7 @@ class CoyController extends AppBaseController
     {
         $coys = $this->coyRepository->paginate(10);
 
-        return view('coys.index')
-            ->with('coys', $coys);
+        return view('coys.index')->with('coys', $coys);
     }
 
     /**
@@ -48,7 +51,6 @@ class CoyController extends AppBaseController
         $coy = $this->coyRepository->create($input);
 
         Flash::success('Coy saved successfully.');
-
         return redirect(route('coys.index'));
     }
 
@@ -58,10 +60,9 @@ class CoyController extends AppBaseController
     public function show($id)
     {
         $coy = $this->coyRepository->find($id);
-
+        
         if (empty($coy)) {
             Flash::error('Coy not found');
-
             return redirect(route('coys.index'));
         }
 
@@ -77,7 +78,6 @@ class CoyController extends AppBaseController
 
         if (empty($coy)) {
             Flash::error('Coy not found');
-
             return redirect(route('coys.index'));
         }
 
@@ -93,14 +93,12 @@ class CoyController extends AppBaseController
 
         if (empty($coy)) {
             Flash::error('Coy not found');
-
             return redirect(route('coys.index'));
         }
 
         $coy = $this->coyRepository->update($request->all(), $id);
 
         Flash::success('Coy updated successfully.');
-
         return redirect(route('coys.index'));
     }
 
@@ -115,14 +113,12 @@ class CoyController extends AppBaseController
 
         if (empty($coy)) {
             Flash::error('Coy not found');
-
             return redirect(route('coys.index'));
         }
 
         $this->coyRepository->delete($id);
 
         Flash::success('Coy deleted successfully.');
-
         return redirect(route('coys.index'));
     }
 }

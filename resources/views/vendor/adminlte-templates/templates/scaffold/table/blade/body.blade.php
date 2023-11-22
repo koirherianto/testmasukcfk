@@ -6,17 +6,12 @@
 @lang('models/{{ $config->modelNames->camelPlural }}.plural')
                 @else
 {{ $config->modelNames->humanPlural }} 
-                @endif
-</h5>
+            @endif</h5>
         <div class="ms-auto">
             <div class="dropdown">
-                <a class="btn btn-primary float-right" href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.create') }}">
-                       @if($config->options->localized)
-@@lang('crud.add_new')
-                        @else
-Tambah Data
-                        @endif
-</a>
+                @@can('{!! $config->modelNames->camel !!}.index')
+                <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.create') }}" class="btn btn-primary float-right">@if($config->options->localized) @@lang('crud.add_new') @else Tambah Data @endif</a>
+                @@endcan
             </div>
         </div>
     </div>
@@ -39,14 +34,18 @@ Tambah Data
                     <td style="width: 120px">
                         @{!! Form::open(['route' => ['{{ $config->prefixes->getRoutePrefixWith('.') }}{{ $config->modelNames->camelPlural }}.destroy', ${{ $config->modelNames->camel }}->{{ $config->primaryName }}], 'method' => 'delete']) !!}
                         <div class='btn-group'>
+                            @@can('{!! $config->modelNames->camel !!}.index')
                             <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.show', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}"
                                class='btn btn-primary btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
+                            @@endcan
+                            @@can('{!! $config->modelNames->camel !!}.edit')
                             <a href="@{{ route('{!! $config->prefixes->getRoutePrefixWith('.') !!}{!! $config->modelNames->camelPlural !!}.edit', [${!! $config->modelNames->camel !!}->{!! $config->primaryName !!}]) }}"
                                class='btn btn-warning btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
+                            @@endcan
                             @{!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                         </div>
                         @{!! Form::close() !!}

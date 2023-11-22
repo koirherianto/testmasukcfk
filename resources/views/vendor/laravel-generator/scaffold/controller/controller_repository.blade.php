@@ -21,6 +21,10 @@ class {{ $config->modelNames->name }}Controller extends AppBaseController
 
     public function __construct({{ $config->modelNames->name }}Repository ${{ $config->modelNames->camel }}Repo)
     {
+        $this->middleware('permission:{{$config->modelNames->camel}}.index', ['only' => ['index','show']]);
+        $this->middleware('permission:{{$config->modelNames->camel}}.create', ['only' => ['create','store']]);
+        $this->middleware('permission:{{$config->modelNames->camel}}.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:{{$config->modelNames->camel}}.destroy', ['only' => ['destroy']]);
         $this->{{ $config->modelNames->camel }}Repository = ${{ $config->modelNames->camel }}Repo;
     }
 
