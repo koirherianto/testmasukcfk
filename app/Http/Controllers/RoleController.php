@@ -142,10 +142,11 @@ class RoleController extends AppBaseController
             return redirect(route('roles.index'));
         }
 
-        // Hapus izin yang terkait dengan peran
-        $role->permissions()->detach();
-
-        $this->roleRepository->delete($id);
+        DB::transaction(function () use($role,$id){
+            $role->permissions()->detach();
+            $role->users()->detach();
+            $this->roleRepository->delete($id);
+        }, 3);
 
         Flash::success('Role deleted successfully.');
         return redirect(route('roles.index'));

@@ -1,13 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-        Create Permissions
-    @endsection
+    Create Permissions
+@endsection
 
 @section('page-title')
-    
     Create Permissions
-    @endsection
+@endsection
 
 @section('body')
     <body>

@@ -40,7 +40,11 @@ class UserController extends AppBaseController
      */
     public function create()
     {
-        return view('users.create');
+        $roles = [];
+        $isEditPage = false;
+        $sRoles = Role::orderBy('name')->get();
+
+        return view('users.create',compact('roles','sRoles','isEditPage'));
     }
 
     /**
@@ -48,9 +52,21 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
+        $roles = [];
         $input = $request->all();
         unset($input['email_verified_at']);
-        $user = $this->userRepository->create($input);
+
+        if ($request->has('s_role_id')) {
+            // Ambil nama peran berdasarkan ID yang diberikan
+            $roles = Role::whereIn('id', $input['s_role_id'])->pluck('name')->toArray();
+        }
+
+        DB::transaction(function () use ($input, $roles) {
+            $user = $this->userRepository->create($input);
+            $user->syncRoles($roles);
+            $user->password = bcrypt($input['password']);
+            $user->save();
+        }, 3);
 
         Flash::success('User saved successfully.');
         return redirect(route('users.index'));
@@ -80,17 +96,20 @@ class UserController extends AppBaseController
 
         if (empty($user)) {
             Flash::error('User not found');
+
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        $sRoles=Role::orderBy('name')->get();
+        $roles=$user->roles->pluck('id')->toArray();
+        $isEditPage = true; 
+
+        return view('users.edit',compact('roles','sRoles','isEditPage'))->with('user', $user);
     }
 
-    /**
-     * Update the specified User in storage.
-     */
-    public function update($id, UpdateUserRequest $request)
+    public function update($id, Request $request)
     {
+        $role = Auth::user()->getRoleNames()->first();
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
@@ -98,17 +117,31 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        // apakah password kosong
-        if (empty($request->password)) {
-            unset($request['password']);
+        $input=$request->all();
+
+        if($input['password'] === '' || $input['password'] === null){
+            unset($input['password']);
         }
 
-        unset($request['remember_token']);
-        unset($request['email_verified_at']);
+        $roles=[];
+        if ($request->has('s_role_id')) {
+            $roles = Role::whereIn('id', $input['s_role_id'])->pluck('name')->toArray();
+        }
 
-        $user = $this->userRepository->update($request->all(), $id);
+        unset($input['remember_token']);
+        unset($input['email_verified_at']);
+        
+        DB::transaction(function () use($input,$roles,$id,$request){
+            $user = $this->userRepository->update($input, $id);
+            $user->syncRoles($roles);
 
-        Flash::success('User updated successfully.');
+            if(isset($input['password'])){
+                $user->password = bcrypt($input['password']);
+            }
+            $user->save();
+        },3);
+
+        Flash::success('User updated successfully');
         return redirect(route('users.index'));
     }
 
@@ -126,7 +159,10 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $this->userRepository->delete($id);
+        DB::transaction(function () use($user,$id){
+            $user->syncRoles([]);
+            $this->userRepository->delete($id);
+        },3);
 
         Flash::success('User deleted successfully.');
         return redirect(route('users.index'));

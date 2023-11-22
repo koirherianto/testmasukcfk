@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\PermissionRepository;
 use Illuminate\Http\Request;
 use Flash;
+use DB;
 
 class PermissionController extends AppBaseController
 {
@@ -112,7 +113,10 @@ class PermissionController extends AppBaseController
             return redirect(route('permissions.index'));
         }
 
-        $this->permissionRepository->delete($id);
+        DB::transaction(function () use($permission){
+            $permission->syncRoles([]);
+            $permission->delete();
+        },3);
 
         Flash::success('Permission deleted successfully.');
         return redirect(route('permissions.index'));

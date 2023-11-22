@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-        Edit Permission
-    @endsection
+    Edit Permission
+@endsection
 
 @section('page-title')
-    
     Edit Permission
 @endsection
 

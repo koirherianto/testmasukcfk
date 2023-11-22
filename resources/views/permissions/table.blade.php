@@ -3,12 +3,12 @@
         <div class="d-flex flex-wrap align-items-center mb-2">
             <h5 class="card-title">
                 Permissions 
-                </h5>
+            </h5>
         <div class="ms-auto">
             <div class="dropdown">
                 <a class="btn btn-primary float-right" href="{{ route('permissions.create') }}">
-                       Tambah Data
-                        </a>
+                    Tambah Data
+                </a>
             </div>
         </div>
     </div>

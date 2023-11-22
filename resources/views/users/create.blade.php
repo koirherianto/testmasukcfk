@@ -1,13 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-        Create Users
-    @endsection
+    Create Users
+@endsection
 
 @section('page-title')
-    
     Create Users
-    @endsection
+@endsection
 
 @section('body')
     <body>

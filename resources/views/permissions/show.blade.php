@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-        Permission Details
-    @endsection
+    Permission Details
+@endsection
 
 @section('page-title')
-    
     Permission Details
 @endsection
 

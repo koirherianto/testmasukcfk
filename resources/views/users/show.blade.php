@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-        User Details
-    @endsection
+    User Details
+@endsection
 
 @section('page-title')
-    
     User Details
 @endsection
 

@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-        Edit User
-    @endsection
+    Edit User
+@endsection
 
 @section('page-title')
-    
     Edit User
 @endsection
 

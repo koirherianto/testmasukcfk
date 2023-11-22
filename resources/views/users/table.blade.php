@@ -3,12 +3,12 @@
         <div class="d-flex flex-wrap align-items-center mb-2">
             <h5 class="card-title">
                 Users 
-                </h5>
+            </h5>
         <div class="ms-auto">
             <div class="dropdown">
                 <a class="btn btn-primary float-right" href="{{ route('users.create') }}">
-                       Tambah Data
-                        </a>
+                    Tambah Data
+                </a>
             </div>
         </div>
     </div>
@@ -18,6 +18,7 @@
             <tr>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Roles</th>
                 <th>Email Verified At</th>
                 <th colspan="3">Action</th>
                 </tr>
@@ -27,6 +28,11 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        @foreach($user->getRoleNames() as $role)
+                            <span class="badge bg-primary p-2">{{ $role }}</span>
+                        @endforeach
+                    </td>
                     <td>{{ $user->email_verified_at }}</td>
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}

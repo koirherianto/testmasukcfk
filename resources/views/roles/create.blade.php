@@ -1,13 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-        Create Roles
-    @endsection
+    Create Roles
+@endsection
 
 @section('page-title')
-    
     Create Roles
-    @endsection
+@endsection
 
 @section('body')
     <body>
