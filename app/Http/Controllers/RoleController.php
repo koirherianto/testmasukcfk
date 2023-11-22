@@ -7,7 +7,11 @@ use App\Http\Requests\UpdateRoleRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\RoleRepository;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Flash;
+use DB;
+use Illuminate\View\View;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends AppBaseController
 {
@@ -22,7 +26,7 @@ class RoleController extends AppBaseController
     /**
      * Display a listing of the Role.
      */
-    public function index(Request $request)
+    public function index(Request $request) : View
     {
         $roles = $this->roleRepository->paginate(10);
 
@@ -32,21 +36,33 @@ class RoleController extends AppBaseController
     /**
      * Show the form for creating a new Role.
      */
-    public function create()
+    public function create() : View
     {
-        return view('roles.create');
+        $sPermissions = Permission::orderBy('name')->get();
+        $permissions = [];
+
+        return view('roles.create',compact('sPermissions','permissions'));
     }
 
-    /**
-     * Store a newly created Role in storage.
-     */
     public function store(CreateRoleRequest $request)
     {
-        $input = $request->all();
+        try{
+            DB::beginTransaction();
 
-        $role = $this->roleRepository->create($input);
+            $role = Role::create($request->all());
 
-        Flash::success('Role saved successfully.');
+            if($request->has('permission_id')) {
+                $permissions = Permission::whereIn('id',$request->permission_id)->get();
+                $role->syncPermissions($permissions);
+            }
+
+            DB::commit();
+            Flash::success('Role updated successfully.');
+        }catch (Exception $e){
+            DB::rollBack();
+            Flash::error('Role updated not save.');
+        }
+
         return redirect(route('roles.index'));
     }
 
@@ -56,13 +72,15 @@ class RoleController extends AppBaseController
     public function show($id)
     {
         $role = $this->roleRepository->find($id);
-        
+
         if (empty($role)) {
             Flash::error('Role not found');
             return redirect(route('roles.index'));
         }
 
-        return view('roles.show')->with('role', $role);
+        $permissions = $role->permissions ? $role->permissions->pluck('name','id') : [];
+
+        return view('roles.show', compact('role', 'permissions'));
     }
 
     /**
@@ -74,10 +92,14 @@ class RoleController extends AppBaseController
 
         if (empty($role)) {
             Flash::error('Role not found');
+
             return redirect(route('roles.index'));
         }
 
-        return view('roles.edit')->with('role', $role);
+        $sPermissions=Permission::orderBy('name')->get();
+        $permissions=$role->permissions->pluck('id')->toArray();
+
+        return view('roles.edit',compact('sPermissions', 'permissions'))->with('role', $role);
     }
 
     /**
@@ -89,20 +111,28 @@ class RoleController extends AppBaseController
 
         if (empty($role)) {
             Flash::error('Role not found');
-            return redirect(route('roles.index'));
+            return redirect(route('role.index'));
         }
 
-        $role = $this->roleRepository->update($request->all(), $id);
+        try{
+            DB::beginTransaction();
+            
+            $role->update($request->all());
 
-        Flash::success('Role updated successfully.');
+            if($request->has('permission_id')){
+                $permissions = Permission::whereIn('id',$request->permission_id)->get();
+                $role->syncPermissions($permissions);
+            }
+
+            DB::commit();
+            Flash::success('Role updated successfully.');
+        }catch (Exception $e){
+            DB::rollBack();
+            Flash::error('Role updated not save.');
+        }
         return redirect(route('roles.index'));
     }
 
-    /**
-     * Remove the specified Role from storage.
-     *
-     * @throws \Exception
-     */
     public function destroy($id)
     {
         $role = $this->roleRepository->find($id);
@@ -111,6 +141,9 @@ class RoleController extends AppBaseController
             Flash::error('Role not found');
             return redirect(route('roles.index'));
         }
+
+        // Hapus izin yang terkait dengan peran
+        $role->permissions()->detach();
 
         $this->roleRepository->delete($id);
 
