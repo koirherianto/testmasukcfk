@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kucing extends Model
 {
-    public $table = 'kucings';
+    use HasFactory;    public $table = 'kucings';
 
     public $fillable = [
         'nama',

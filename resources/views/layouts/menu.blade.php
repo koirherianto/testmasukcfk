@@ -299,6 +299,7 @@
 
 <li class="menu-title">User</li>
 
+
 @can('kucing.index')
 <li>
     <a href="{{ route('kucings.index') }}">
