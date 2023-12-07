@@ -138,7 +138,7 @@ return [
 
         'repository_pattern' => true,
 
-        'resources' => false,
+        'resources' => true,
 
         'factory' => true,
 

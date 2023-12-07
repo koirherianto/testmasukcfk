@@ -9,13 +9,15 @@ use App\Repositories\KucingRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Resources\KucingResource;
 
 /**
  * Class KucingAPIController
  */
 class KucingAPIController extends AppBaseController
 {
-    private KucingRepository $kucingRepository;
+    /** @var  KucingRepository */
+    private $kucingRepository;
 
     public function __construct(KucingRepository $kucingRepo)
     {
@@ -34,7 +36,7 @@ class KucingAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($kucings->toArray(), 'Kucings retrieved successfully');
+        return $this->sendResponse(KucingResource::collection($kucings), 'Kucings retrieved successfully');
     }
 
     /**
@@ -47,7 +49,7 @@ class KucingAPIController extends AppBaseController
 
         $kucing = $this->kucingRepository->create($input);
 
-        return $this->sendResponse($kucing->toArray(), 'Kucing saved successfully');
+        return $this->sendResponse(new KucingResource($kucing), 'Kucing saved successfully');
     }
 
     /**
@@ -63,7 +65,7 @@ class KucingAPIController extends AppBaseController
             return $this->sendError('Kucing not found');
         }
 
-        return $this->sendResponse($kucing->toArray(), 'Kucing retrieved successfully');
+        return $this->sendResponse(new KucingResource($kucing), 'Kucing retrieved successfully');
     }
 
     /**
@@ -83,7 +85,7 @@ class KucingAPIController extends AppBaseController
 
         $kucing = $this->kucingRepository->update($input, $id);
 
-        return $this->sendResponse($kucing->toArray(), 'Kucing updated successfully');
+        return $this->sendResponse(new KucingResource($kucing), 'Kucing updated successfully');
     }
 
     /**

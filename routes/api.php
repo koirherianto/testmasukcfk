@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
+
 Route::resource('kucings', App\Http\Controllers\API\KucingAPIController::class)
     ->except(['create', 'edit']);
