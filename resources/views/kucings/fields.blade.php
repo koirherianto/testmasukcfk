@@ -1,7 +1,7 @@
 <!-- Nama Field -->
 <div class="form-group col-sm-6 mb-2">
     {!! Form::label('nama', 'Nama:') !!}
-    {!! Form::text('nama', null, ['class' => 'form-control', 'required', 'maxlength' => 124, 'maxlength' => 124]) !!}
+    {!! Form::text('nama', null, ['class' => 'form-control', 'required', 'maxlength' => 124, 'maxlength' => 124, 'maxlength' => 124]) !!}
     @error('nama') 
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
@@ -29,7 +29,7 @@
 <!-- Penjelasa Field -->
 <div class="form-group col-sm-12 col-lg-12 mb-2">
     {!! Form::label('penjelasa', 'Penjelasa:') !!}
-    {!! Form::textarea('penjelasa', null, ['class' => 'form-control', 'required', 'maxlength' => 65535, 'maxlength' => 65535]) !!}
+    {!! Form::textarea('penjelasa', null, ['class' => 'form-control', 'required', 'maxlength' => 65535, 'maxlength' => 65535, 'maxlength' => 65535]) !!}
     @error('penjelasa') 
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
