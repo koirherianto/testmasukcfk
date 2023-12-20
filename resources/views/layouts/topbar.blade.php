@@ -155,7 +155,7 @@
                         <h6 class="mb-0">{{ Auth::user()->name }}</h6>
                         <p class="mb-0 font-size-11 text-muted">{{ Auth::user()->email }}</p>
                     </div>
-                    <a class="dropdown-item" href="{{ route('edit.profile') }}"><i
+                    <a class="dropdown-item" href="{{ route('profile') }}"><i
                             class="mdi mdi-account-circle text-muted font-size-16 align-middle me-2"></i> <span
                             class="align-middle">Profile</span></a>
                     {{-- <a class="dropdown-item" href="apps-chat"><i
@@ -164,7 +164,7 @@
                     {{-- <a class="dropdown-item" href="pages-faqs"><i
                             class="mdi mdi-lifebuoy text-muted font-size-16 align-middle me-2"></i> <span
                             class="align-middle">Help</span></a> --}}
-                    <a class="dropdown-item d-flex align-items-center" href="{{ route('edit.profile') }}"><i
+                    <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}"><i
                             class="mdi mdi-cog-outline text-muted font-size-16 align-middle me-2"></i> <span
                             class="align-middle me-3">Settings</span><span
                             class="badge badge-soft-success ms-auto">New</span></a>
