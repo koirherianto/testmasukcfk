@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-        Edit Kucing
-    @endsection
+    Edit Kucing
+@endsection
 
 @section('page-title')
-    
     Edit Kucing
 @endsection
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Nov 2023 pada 07.33
+-- Waktu pembuatan: 28 Des 2023 pada 01.29
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -206,7 +206,19 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (10, 'kucing.index', 'web', '2023-11-21 22:19:59', '2023-11-21 22:19:59'),
 (11, 'kucing.create', 'web', '2023-11-21 22:19:59', '2023-11-21 22:19:59'),
 (12, 'kucing.edit', 'web', '2023-11-21 22:19:59', '2023-11-21 22:19:59'),
-(13, 'kucing.destroy', 'web', '2023-11-21 22:19:59', '2023-11-21 22:19:59');
+(13, 'kucing.destroy', 'web', '2023-11-21 22:19:59', '2023-11-21 22:19:59'),
+(14, 'permission.index', 'web', '2023-12-27 16:26:00', '2023-12-27 16:26:00'),
+(15, 'permission.create', 'web', '2023-12-27 16:26:08', '2023-12-27 16:26:08'),
+(16, 'permission.edit', 'web', '2023-12-27 16:26:17', '2023-12-27 16:26:17'),
+(17, 'permission.destroy', 'web', '2023-12-27 16:26:27', '2023-12-27 16:26:27'),
+(18, 'role.index', 'web', '2023-12-27 16:26:48', '2023-12-27 16:26:48'),
+(19, 'role.create', 'web', '2023-12-27 16:26:57', '2023-12-27 16:26:57'),
+(20, 'role.edit', 'web', '2023-12-27 16:27:05', '2023-12-27 16:27:05'),
+(21, 'role.destroy', 'web', '2023-12-27 16:27:13', '2023-12-27 16:27:13'),
+(22, 'user.index', 'web', '2023-12-27 16:27:33', '2023-12-27 16:27:33'),
+(23, 'user.create', 'web', '2023-12-27 16:27:42', '2023-12-27 16:27:42'),
+(24, 'user.edit', 'web', '2023-12-27 16:27:51', '2023-12-27 16:27:51'),
+(25, 'user.destroy', 'web', '2023-12-27 16:27:59', '2023-12-27 16:27:59');
 
 -- --------------------------------------------------------
 
@@ -267,7 +279,19 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (10, 4),
 (11, 4),
 (12, 4),
-(13, 4);
+(13, 4),
+(14, 4),
+(15, 4),
+(16, 4),
+(17, 4),
+(18, 4),
+(19, 4),
+(20, 4),
+(21, 4),
+(22, 4),
+(23, 4),
+(24, 4),
+(25, 4);
 
 -- --------------------------------------------------------
 
@@ -419,7 +443,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`

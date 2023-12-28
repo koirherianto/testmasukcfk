@@ -6,9 +6,11 @@
             </h5>
         <div class="ms-auto">
             <div class="dropdown">
+                @can('permission.index')
                 <a class="btn btn-primary float-right" href="{{ route('permissions.create') }}">
                     Tambah Data
                 </a>
+                @endcan
             </div>
         </div>
     </div>
@@ -18,7 +20,7 @@
             <tr>
                 <th>Name</th>
                 <th>Guard Name</th>
-                <th colspan="3">Action</th>
+                <th >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,15 +31,21 @@
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['permissions.destroy', $permission->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
+                            @can('permission.index')
                             <a href="{{ route('permissions.show', [$permission->id]) }}"
                                class='btn btn-primary btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
+                            @endcan
+                            @can('permission.edit')
                             <a href="{{ route('permissions.edit', [$permission->id]) }}"
                                class='btn btn-warning btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
+                            @endcan
+                            @can('permission.destroy')
                             {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            @endcan
                         </div>
                         {!! Form::close() !!}
                     </td>
@@ -46,11 +54,5 @@
             </tbody>
         </table>
     </div>
-    </div>
-
-    <div class="card-footer clearfix">
-        <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $permissions])
-        </div>
     </div>
 </div>

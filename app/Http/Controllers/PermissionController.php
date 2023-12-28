@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePermissionRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\PermissionRepository;
 use Illuminate\Http\Request;
+use App\Models\Permission;
 use Flash;
 use DB;
 
@@ -17,10 +18,10 @@ class PermissionController extends AppBaseController
 
     public function __construct(PermissionRepository $permissionRepo)
     {
-        // $this->middleware('permission:Permission.index', ['only' => ['index','show']]);
-        // $this->middleware('permission:Permission.create', ['only' => ['create','store']]);
-        // $this->middleware('permission:Permission.edit', ['only' => ['edit','update']]);
-        // $this->middleware('permission:Permission.destroy', ['only' => ['destroy']]);
+        $this->middleware('permission:permission.index', ['only' => ['index','show']]);
+        $this->middleware('permission:permission.create', ['only' => ['create','store']]);
+        $this->middleware('permission:permission.edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:permission.destroy', ['only' => ['destroy']]);
         $this->permissionRepository = $permissionRepo;
     }
 
@@ -29,7 +30,7 @@ class PermissionController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $permissions = $this->permissionRepository->paginate(10);
+        $permissions = Permission::all();
 
         return view('permissions.index')->with('permissions', $permissions);
     }

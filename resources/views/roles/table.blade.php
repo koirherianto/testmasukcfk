@@ -6,9 +6,11 @@
             </h5>
         <div class="ms-auto">
             <div class="dropdown">
+                @can('role.index')
                 <a class="btn btn-primary float-right" href="{{ route('roles.create') }}">
-                    Tambah Data
+                    Add Role
                 </a>
+                @endcan
             </div>
         </div>
     </div>
@@ -29,15 +31,21 @@
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['roles.destroy', $role->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
+                            @can('role.index')
                             <a href="{{ route('roles.show', [$role->id]) }}"
                                class='btn btn-primary btn-xs'>
                                 <i class="far fa-eye"></i>
                             </a>
+                            @endcan
+                            @can('role.edit')
                             <a href="{{ route('roles.edit', [$role->id]) }}"
                                class='btn btn-warning btn-xs'>
                                 <i class="far fa-edit"></i>
                             </a>
+                            @endcan
+                            @can('role.destroy')
                             {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                            @endcan
                         </div>
                         {!! Form::close() !!}
                     </td>

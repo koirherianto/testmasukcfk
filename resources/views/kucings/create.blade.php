@@ -1,13 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-        Create Kucings
-    @endsection
-
-@section('page-title')
-    
     Create Kucings
-    @endsection
+@endsection
+
+@section('page-title')    
+    Create Kucings
+@endsection
 
 @section('body')
     <body>
