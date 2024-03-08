@@ -36,8 +36,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
 });
 
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-
-Route::resource('coyCoys', App\Http\Controllers\CoyCoyController::class);
-
 Route::resource('kucings', App\Http\Controllers\KucingController::class);
+Route::resource('dapartemens', App\Http\Controllers\DapartemenController::class);
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');

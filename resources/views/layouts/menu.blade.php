@@ -14,7 +14,7 @@
 </li>
 
 
-<li class="menu-title" data-key="t-menu">Dashboard</li>
+{{-- <li class="menu-title" data-key="t-menu">Dashboard</li>
 
 <li>
     <a href="javascript: void(0);">
@@ -272,7 +272,7 @@
             </ul>
         </li>
     </ul>
-</li>
+</li> --}}
 
 <li class="menu-title" >Admin</li>
 
@@ -306,6 +306,15 @@
     <a href="{{ route('kucings.index') }}">
         <i class="bx bx-home-alt icon nav-icon"></i>
         <span class="menu-item">Kucings</span>
+        </a>
+</li>
+@endcan
+
+@can('dapartemen.index')
+<li>
+    <a href="{{ route('dapartemens.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">Dapartemens</span>
         </a>
 </li>
 @endcan
