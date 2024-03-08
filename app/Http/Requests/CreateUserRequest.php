@@ -26,6 +26,9 @@ class CreateUserRequest extends FormRequest
     {
         $rules = User::$rules;
         unset($rules['email_verified_at']);
+         // Tambahkan aturan validasi untuk 's_dapartemen_id'
+        $rules['s_dapartemen_id'] = 'required|array|min:1';
+        $rules['s_role_id'] = 'required|array|min:1';
         return $rules;
     }
 }

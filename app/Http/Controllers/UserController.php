@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Flash;
 use DB;
+use App\Models\Dapartemen;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
@@ -47,8 +48,9 @@ class UserController extends AppBaseController
         $roles = [];
         $isEditPage = false;
         $sRoles = Role::orderBy('name')->get();
+        $dapartemens = Dapartemen::orderBy('name')->get();
 
-        return view('users.create',compact('roles','sRoles','isEditPage'));
+        return view('users.create',compact('roles','sRoles','isEditPage','dapartemens'));
     }
 
     /**
@@ -65,9 +67,16 @@ class UserController extends AppBaseController
             $roles = Role::whereIn('id', $input['s_role_id'])->pluck('name')->toArray();
         }
 
-        DB::transaction(function () use ($input, $roles) {
+        if ($request->has('s_dapartemen_id')) {
+            // Ambil ID departemen yang dipilih oleh pengguna
+            $dapartemens = $input['s_dapartemen_id'];
+        }
+
+        DB::transaction(function () use ($input, $roles, $dapartemens) {
             $user = $this->userRepository->create($input);
             $user->syncRoles($roles);
+            // Sisipkan relasi banyak-ke-banyak ke departemen
+            $user->dapartemens()->attach($dapartemens);
             $user->password = bcrypt($input['password']);
             $user->save();
         }, 3);
@@ -100,16 +109,21 @@ class UserController extends AppBaseController
 
         if (empty($user)) {
             Flash::error('User not found');
-
             return redirect(route('users.index'));
         }
 
-        $sRoles=Role::orderBy('name')->get();
-        $roles=$user->roles->pluck('id')->toArray();
-        $isEditPage = true; 
+        $sRoles = Role::orderBy('name')->get();
+        $roles = $user->roles->pluck('id')->toArray();
 
-        return view('users.edit',compact('roles','sRoles','isEditPage'))->with('user', $user);
+        // Mendapatkan semua dapartemen untuk ditampilkan pada formulir
+        $dapartemens = Dapartemen::orderBy('name')->get();
+        $userDapartemens = $user->dapartemens->pluck('id')->toArray();
+
+        $isEditPage = true;
+
+        return view('users.edit', compact('roles', 'sRoles', 'isEditPage', 'dapartemens', 'userDapartemens','user'));
     }
+
 
     public function update($id, Request $request)
     {
@@ -132,12 +146,18 @@ class UserController extends AppBaseController
             $roles = Role::whereIn('id', $input['s_role_id'])->pluck('name')->toArray();
         }
 
+        // Mengambil dapartemen yang dipilih dari formulir
+        $userDapartemens = isset($input['s_dapartemen_id']) ? $input['s_dapartemen_id'] : [];
+
         unset($input['remember_token']);
         unset($input['email_verified_at']);
         
-        DB::transaction(function () use($input,$roles,$id,$request){
+        DB::transaction(function () use ($input, $roles, $userDapartemens, $id, $request) {
             $user = $this->userRepository->update($input, $id);
             $user->syncRoles($roles);
+
+             // Menyimpan dapartemen yang dipilih
+            $user->dapartemens()->sync($userDapartemens);
 
             if(isset($input['password'])){
                 $user->password = bcrypt($input['password']);

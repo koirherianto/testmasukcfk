@@ -21,7 +21,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Email Verified At</th>
+                <th>Dapartements</th>
                 <th colspan="3">Action</th>
                 </tr>
             </thead>
@@ -35,7 +35,11 @@
                             <span class="badge bg-primary p-2">{{ $role }}</span>
                         @endforeach
                     </td>
-                    <td>{{ $user->email_verified_at }}</td>
+                    <td>
+                        @foreach($user->dapartemens as $dapartemen)
+                            <span class="badge bg-primary p-2">{{ $dapartemen->name }}</span>
+                        @endforeach
+                    </td>
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>

@@ -43,5 +43,10 @@ class User extends Authenticatable implements HasMedia
         'updated_at' => 'nullable'
     ];
 
+    // relasi many to many ke dapartemen
+    public function dapartemens() : \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Dapartemen::class, 'users_has_dapartements', 'users_id', 'dapartements_id');
+    }
     
 }

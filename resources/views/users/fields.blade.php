@@ -39,7 +39,7 @@
     @enderror
 </div>
 
-<div class="card bg-grey bg-lighten-4 rounded-2 col-sm-12">
+<div class="card bg-grey bg-lighten-4 rounded-2 col-sm-12 mt-3">
     <div class="d-flex pt-1 pb-1">
         {!! Form::label('s_role_id', 'Hak Akses Diberikan', ['class' => 'col-md-3 label-control text-uppercase mb-0']) !!}
         <div class="skin skin-flat">
@@ -51,6 +51,24 @@
                     <label for="input-{{ $item->id }}"
                         class="ml-1 text-bold-700 black text-uppercase">{!! $item->name !!}
                         {!! $item->desc !!}</label>
+                </fieldset>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<div class="card bg-grey bg-lighten-4 rounded-2 col-sm-12">
+    <div class="d-flex pt-1 pb-1">
+        {!! Form::label('s_dapartemen_id', 'Pilih Dapartemen', ['class' => 'col-md-3 label-control text-uppercase mb-0']) !!}
+        <div class="skin skin-flat">
+            @foreach ($dapartemens as $dapartemen)
+                <fieldset>
+                    {!! Form::checkbox('s_dapartemen_id[]', $dapartemen->id, in_array($dapartemen->id, $userDapartemens) ? true : false, [
+                        'id' => 'input-' . $dapartemen->id,
+                    ]) !!}
+                    <label for="input-{{ $dapartemen->id }}"
+                        class="ml-1 text-bold-700 black text-uppercase">{!! $dapartemen->name !!}
+                        {!! $dapartemen->desc !!}</label>
                 </fieldset>
             @endforeach
         </div>
