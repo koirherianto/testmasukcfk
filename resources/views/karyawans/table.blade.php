@@ -6,7 +6,7 @@
             </h5>
         <div class="ms-auto">
             <div class="dropdown">
-                @can('karyawan.index')
+                @can('karyawan.create')
                 <a href="{{ route('karyawans.create') }}" class="btn btn-primary float-right"> Tambah Karyawan</a>
                 @endcan
             </div>

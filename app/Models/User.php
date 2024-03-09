@@ -48,5 +48,11 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Dapartemen::class, 'users_has_dapartements', 'users_id', 'dapartements_id');
     }
+
+    // relasi many to many dapatkan yang pertama
+    public function dapartemen()
+    {
+        return $this->belongsToMany(Dapartemen::class, 'users_has_dapartements', 'users_id', 'dapartements_id')->first();
+    }
     
 }

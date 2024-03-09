@@ -274,40 +274,44 @@
     </ul>
 </li> --}}
 
+@if(Auth::user()->can('user.index') || Auth::user()->can('role.index') || Auth::user()->can('permission.index'))
 <li class="menu-title" >Admin</li>
-
+@endif
+@can('user.index')
 <li>
     <a href="{{ route('users.index') }}">
         <i class="bx bx-user icon nav-icon"></i>
         <span class="menu-item">Users</span>
     </a>
 </li>
+@endcan
 
+@can('role.index')
 <li>
     <a href="{{ route('roles.index') }}">
         <i class="bx bx-lock-open-alt icon nav-icon"></i>
         <span class="menu-item">Roles</span>
     </a>
 </li>
+@endcan
 
+@can('permission.index')
 <li>
     <a href="{{ route('permissions.index') }}">
         <i class="bx bx-shield icon nav-icon"></i>
         <span class="menu-item">Permissions</span>
     </a>
 </li>
+@endcan
 
 <li class="menu-title">User</li>
-
-
-
 
 @can('dapartemen.index')
 <li>
     <a href="{{ route('dapartemens.index') }}">
         <i class="bx bx-home-alt icon nav-icon"></i>
         <span class="menu-item">Dapartemen</span>
-        </a>
+    </a>
 </li>
 @endcan
 
@@ -316,6 +320,6 @@
     <a href="{{ route('karyawans.index') }}">
         <i class="bx bx-home-alt icon nav-icon"></i>
         <span class="menu-item">Karyawan</span>
-        </a>
+    </a>
 </li>
 @endcan

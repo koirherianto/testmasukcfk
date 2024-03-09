@@ -63,9 +63,15 @@
         <div class="skin skin-flat">
             @foreach ($dapartemens as $dapartemen)
                 <fieldset>
-                    {!! Form::checkbox('s_dapartemen_id[]', $dapartemen->id, in_array($dapartemen->id, $userDapartemens) ? true : false, [
-                        'id' => 'input-' . $dapartemen->id,
-                    ]) !!}
+                    @if ($isEditPage)
+                        {!! Form::checkbox('s_dapartemen_id[]', $dapartemen->id, in_array($dapartemen->id, $userDapartemens) ? true : false, [
+                            'id' => 'input-' . $dapartemen->id,
+                        ]) !!}
+                    @else
+                        {!! Form::checkbox('s_dapartemen_id[]', $dapartemen->id, false, [
+                            'id' => 'input-' . $dapartemen->id,
+                        ]) !!}
+                    @endif
                     <label for="input-{{ $dapartemen->id }}"
                         class="ml-1 text-bold-700 black text-uppercase">{!! $dapartemen->name !!}
                         {!! $dapartemen->desc !!}</label>

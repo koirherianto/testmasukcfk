@@ -8,7 +8,9 @@ use App\Http\Controllers\AppBaseController;
 use App\Repositories\KaryawanRepository;
 use Illuminate\Http\Request;
 use App\Models\Dapartemen;
+use App\Models\Karyawan;
 use Flash;
+use Auth;
 
 class KaryawanController extends AppBaseController
 {
@@ -29,7 +31,14 @@ class KaryawanController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $karyawans = $this->karyawanRepository->paginate(10);
+        $user = Auth::user();
+        
+        if ($user->hasRole(['super-admin','administrasi'])) {
+            $karyawans = $this->karyawanRepository->paginate(10);
+        }else if($user->hasRole(['supervisor','manager'])){
+            $dapartemenUser = $user->dapartemen();
+            $karyawans = Karyawan::where('dapartement_id',$dapartemenUser->id)->paginate(10);
+        }
 
         return view('karyawans.index')->with('karyawans', $karyawans);
     }
