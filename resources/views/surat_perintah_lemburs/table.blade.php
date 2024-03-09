@@ -24,10 +24,13 @@
                 @if (Auth::user()->hasRole('manager'))
                     <th>Aksi</th>
                 @endIf
+                @if (Auth::user()->hasRole('administrasi'))
+                    <th>Aksi</th>
+                @endIf
                 @if (Auth::user()->hasRole('supervisor'))
                     <th colspan="3">Action</th>
                 @endIf
-                
+                    <th>Alur</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,6 +62,7 @@
                     @else
                         <td></td>
                     @endIf
+                    <td> <a href="" class="btn btn-primary p-2">Timeline</a></td>
                 </tr>
             @endforeach
             </tbody>
