@@ -31,6 +31,9 @@
                     <td style="width: 120px">
                         {!! Form::open(['route' => ['karyawans.destroy', $karyawan->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
+                            @if(Auth::user()->hasRole('supervisor'))
+                                <a href="{{ route('suratPerintahLemburs.create') }}?karyawanId={{ $karyawan->id }}" class="btn btn-dark float-right"> Ajukan </a>
+                            @endif
                             @can('karyawan.index')
                             <a href="{{ route('karyawans.show', [$karyawan->id]) }}" class='btn btn-primary btn-xs'>
                                 <i class="far fa-eye"></i>

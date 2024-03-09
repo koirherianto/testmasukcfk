@@ -17,19 +17,30 @@
             <thead>
             <tr>
                 <th>Nama</th>
+                <th>Status</th>
                 <th>Mulai</th>
                 <th>Selesai</th>
                 <th>Total Jam Lembur</th>
-                <th colspan="3">Action</th>
+                @if (Auth::user()->hasRole('manager'))
+                    <th>Aksi</th>
+                @endIf
+                @if (Auth::user()->hasRole('supervisor'))
+                    <th colspan="3">Action</th>
+                @endIf
+                
                 </tr>
             </thead>
             <tbody>
             @foreach($suratPerintahLemburs as $suratPerintahLembur)
                 <tr>
                     <td>{{ $suratPerintahLembur->karyawan->name }}</td>
+                    <td> <span class="badge {{$suratPerintahLembur->spl_status_latest_status_color}} p-2">{{ $suratPerintahLembur->spl_status_latest_status  }} </span></td>
                     <td>{{ $suratPerintahLembur->mulai->format('d-m-Y H:i') }}</td>
                     <td>{{ $suratPerintahLembur->selesai->format('d-m-Y H:i') }}</td>
                     <td>{{ $suratPerintahLembur->total_jam_lembur }}</td>
+                    @if (Auth::user()->hasRole('manager') && $suratPerintahLembur->splStatusLatest->status == 'menunggu')
+                        <td><a href="{{ route('spl.tanggapi', $suratPerintahLembur->id) }}" class="btn btn-success"> Tanggapi </a></td>
+                    @elseif (Auth::user()->hasRole('supervisor') && ($suratPerintahLembur->splStatusLatest->status == 'menunggu' || $suratPerintahLembur->splStatusLatest->status == 'revisi'))
                     <td>
                         <div class="dropdown">
                             <a class="text-muted dropdown-toggle font-size-18" role="button"
@@ -45,6 +56,9 @@
                             </div>
                         </div>
                     </td>
+                    @else
+                        <td></td>
+                    @endIf
                 </tr>
             @endforeach
             </tbody>

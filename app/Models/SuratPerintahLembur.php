@@ -41,4 +41,11 @@ class SuratPerintahLembur extends Model
     {
         return $this->hasMany(\App\Models\SplStatus::class, 'surat_perintah_lembur_id');
     }
+
+    // splStatuses terakhir
+    public function splStatusLatest(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(\App\Models\SplStatus::class, 'surat_perintah_lembur_id')->latest();
+    }
+
 }

@@ -37,7 +37,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('dapartemens', App\Http\Controllers\DapartemenController::class);
     Route::resource('karyawans', App\Http\Controllers\KaryawanController::class);
+    Route::get('suratPerintahLemburs/tanggapi/{id}', [App\Http\Controllers\SuratPerintahLemburController::class, 'tanggapiView'])->name('spl.tanggapi');
+    Route::post('suratPerintahLemburs/tanggapi/{id}', [App\Http\Controllers\SuratPerintahLemburController::class, 'tanggapi'])->name('spl.tanggapi.post');
     Route::resource('suratPerintahLemburs', App\Http\Controllers\SuratPerintahLemburController::class);
+    Route::resource('sPLStatuses', App\Http\Controllers\SPLStatusController::class);
 });
 
 

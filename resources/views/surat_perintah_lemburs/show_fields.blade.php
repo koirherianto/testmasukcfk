@@ -4,6 +4,12 @@
     <p>{{ $suratPerintahLembur->karyawan->name }}</p>
 </div>
 
+{{-- status terakhir --}}
+<div class="col-sm-12">
+    {!! Form::label('spl_status_id', 'Status Terakhir:') !!}
+    <p>{{ $suratPerintahLembur->splStatusLatest->status }}</p>
+</div>
+
 <!-- Karyawan Id Field -->
 <div class="col-sm-12">
     {!! Form::label('karyawan_id', 'NIK:') !!}

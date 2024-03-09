@@ -332,3 +332,12 @@
         </a>
 </li>
 @endcan
+
+@can('sPLStatus.index')
+<li>
+    <a href="{{ route('sPLStatuses.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">S P L Statuses</span>
+        </a>
+</li>
+@endcan

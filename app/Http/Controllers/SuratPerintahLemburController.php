@@ -9,7 +9,9 @@ use App\Repositories\SuratPerintahLemburRepository;
 use Illuminate\Http\Request;
 use App\Models\SuratPerintahLembur;
 use App\Models\Karyawan;
+use App\Models\SPLStatus;
 use Flash;
+use DB;
 use Carbon\Carbon;
 
 class SuratPerintahLemburController extends AppBaseController
@@ -31,20 +33,49 @@ class SuratPerintahLemburController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $suratPerintahLemburs = SuratPerintahLembur::with('karyawan')->paginate(10);
+        $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')->paginate(10);
 
-        return view('surat_perintah_lemburs.index')->with('suratPerintahLemburs', $suratPerintahLemburs);
+        foreach ($suratPerintahLemburs->items() as $item) {
+            // upper case
+            $item->spl_status_latest_status = strtoupper($item->splStatusLatest->status); 
+            $item->spl_status_latest_status_color = $this->badgeColor($item->splStatusLatest->status);
+        }
+
+        return view('surat_perintah_lemburs.index', compact('suratPerintahLemburs'));
+    }
+
+    private function badgeColor($status) : string {
+        switch ($status) {
+            case 'draft':
+                return 'bg-secondary'; // Gray
+                break;
+            case 'menunggu':
+                return 'bg-primary'; // Blue
+                break;
+            case 'revisi':
+                return 'bg-warning'; // Yellow
+                break;
+            case 'disetujui':
+                return 'bg-success'; // Green
+                break;
+            case 'ditolak':
+                return 'bg-danger'; // Red
+                break;
+            default:
+                return 'bg-light'; // Light gray (default)
+        }
     }
 
     /**
      * Show the form for creating a new SuratPerintahLembur.
      */
-    public function create()
+    public function create(Request $request)
     {
+        $choisKaryawanId = $request->query('karyawanId');
         $dapartemenUser = auth()->user()->dapartemen();
         $karyawans = Karyawan::where('dapartement_id', $dapartemenUser->id)->orderBy('name', 'asc')->pluck('name', 'id');
 
-        return view('surat_perintah_lemburs.create', compact('karyawans'));
+        return view('surat_perintah_lemburs.create', compact('karyawans','choisKaryawanId'));
     }
 
     /**
@@ -69,8 +100,17 @@ class SuratPerintahLemburController extends AppBaseController
 
         $input['total_jam_lembur'] = $selisihWaktu->format('%H:%I:%S');
 
-        // Buat surat perintah lembur
-        $suratPerintahLembur = $this->suratPerintahLemburRepository->create($input);
+        $user = auth()->user();
+
+        DB::transaction(function () use ($input, $user) {
+            $suratPerintahLembur = $this->suratPerintahLemburRepository->create($input);
+            SPLStatus::create([
+                'approved_by' => $user->id,
+                'surat_perintah_lembur_id' => $suratPerintahLembur->id,
+                'status' => 'menunggu',
+                'message' => 'Surat Perintah Lembur telah dibuat oleh '. $user->name
+            ]);
+        });
 
         Flash::success('Surat Perintah Lembur saved successfully.');
         return redirect(route('suratPerintahLemburs.index'));
@@ -139,7 +179,17 @@ class SuratPerintahLemburController extends AppBaseController
 
         $input['total_jam_lembur'] = $selisihWaktu->format('%H:%I:%S');
 
-        $suratPerintahLembur = $this->suratPerintahLemburRepository->update($input, $id);
+        $user = auth()->user();
+
+        DB::transaction(function () use ($input, $user, $id) {
+            $suratPerintahLembur = $this->suratPerintahLemburRepository->update($input, $id);
+            SPLStatus::create([
+                'approved_by' => $user->id,
+                'surat_perintah_lembur_id' => $suratPerintahLembur->id,
+                'status' => 'menunggu',
+                'message' => 'Surat Perintah Lembur telah diperbarui oleh '. $user->name
+            ]);
+        });
 
         Flash::success('Surat Perintah Lembur updated successfully.');
         return redirect(route('suratPerintahLemburs.index'));
@@ -159,9 +209,49 @@ class SuratPerintahLemburController extends AppBaseController
             return redirect(route('suratPerintahLemburs.index'));
         }
 
-        $this->suratPerintahLemburRepository->delete($id);
+        // hapus status splStatus
+        DB::transaction(function () use ($suratPerintahLembur, $id) {
+            SPLStatus::where('surat_perintah_lembur_id', $id)->delete();
+            $this->suratPerintahLemburRepository->delete($id);
+        });
 
         Flash::success('Surat Perintah Lembur deleted successfully.');
+        return redirect(route('suratPerintahLemburs.index'));
+    }
+
+    function tanggapiView($id) {
+
+        $suratPerintahLembur = $this->suratPerintahLemburRepository->find($id);
+        
+        if (empty($suratPerintahLembur)) {
+            Flash::error('Surat Perintah Lembur not found');
+            return redirect(route('suratPerintahLemburs.index'));
+        }
+
+        return view('surat_perintah_lemburs.tanggapi', compact('suratPerintahLembur','id'));
+    }
+
+    function tanggapi($id, Request $request) {
+        $suratPerintahLembur = $this->suratPerintahLemburRepository->find($id);
+        
+        if (empty($suratPerintahLembur)) {
+            Flash::error('Surat Perintah Lembur not found');
+            return redirect(route('suratPerintahLemburs.index'));
+        }
+
+        $input = $request->all();
+        $user = auth()->user();
+
+        DB::transaction(function () use ($input, $user, $id) {
+            SPLStatus::create([
+                'approved_by' => $user->id,
+                'surat_perintah_lembur_id' => $id,
+                'status' => $input['status'],
+                'message' => $input['message']
+            ]);
+        });
+
+        Flash::success('Surat Perintah Lembur sudah ditanggapi.');
         return redirect(route('suratPerintahLemburs.index'));
     }
 }

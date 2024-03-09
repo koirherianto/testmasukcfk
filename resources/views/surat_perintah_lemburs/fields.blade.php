@@ -1,7 +1,7 @@
 <!-- Karyawan Id Field -->
 <div class="form-group col-sm-6 mb-2">
     {!! Form::label('karyawan_id', 'Nama:') !!}
-    {!! Form::select('karyawan_id', $karyawans , $karyawanUser->id ?? null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('karyawan_id', $karyawans , $karyawanUser->id ?? $choisKaryawanId ?? null, ['class' => 'form-control', 'required']) !!}
     @error('karyawan_id') 
         <span class="invalid-feedback d-block" role="alert">
             <strong>{{ $message }}</strong>
