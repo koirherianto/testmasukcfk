@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
  use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Dapartemen extends Model
 {
-    use HasFactory;    public $table = 'dapartements';
+    use HasFactory;    
+    public $table = 'dapartements';
 
     public $fillable = [
         'name',

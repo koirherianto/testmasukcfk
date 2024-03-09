@@ -306,7 +306,16 @@
 <li>
     <a href="{{ route('dapartemens.index') }}">
         <i class="bx bx-home-alt icon nav-icon"></i>
-        <span class="menu-item">Dapartemens</span>
+        <span class="menu-item">Dapartemen</span>
+        </a>
+</li>
+@endcan
+
+@can('karyawan.index')
+<li>
+    <a href="{{ route('karyawans.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">Karyawan</span>
         </a>
 </li>
 @endcan

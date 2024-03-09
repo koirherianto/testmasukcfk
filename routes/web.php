@@ -34,8 +34,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', UserController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+
+    Route::resource('dapartemens', App\Http\Controllers\DapartemenController::class);
+    Route::resource('karyawans', App\Http\Controllers\KaryawanController::class);
 });
 
 
-Route::resource('dapartemens', App\Http\Controllers\DapartemenController::class);
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
