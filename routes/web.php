@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('dapartemens', App\Http\Controllers\DapartemenController::class);
     Route::resource('karyawans', App\Http\Controllers\KaryawanController::class);
+    Route::resource('suratPerintahLemburs', App\Http\Controllers\SuratPerintahLemburController::class);
 });
 
 

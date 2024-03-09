@@ -323,3 +323,12 @@
     </a>
 </li>
 @endcan
+
+@can('suratPerintahLembur.index')
+<li>
+    <a href="{{ route('suratPerintahLemburs.index') }}">
+        <i class="bx bx-home-alt icon nav-icon"></i>
+        <span class="menu-item">Surat Perintah Lembur</span>
+        </a>
+</li>
+@endcan
