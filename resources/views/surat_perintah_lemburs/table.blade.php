@@ -13,8 +13,9 @@
         </div>
     </div>
     <div class="table-responsive">
-        <form action="{{ route('suratPerintahLemburs.index') }}" method="GET">
-            @if ($user->hasRole('administrasi'))
+        @if ($user->hasRole('administrasi'))
+        <form action="{{ route('suratPerintahLemburs.index') }}" method="GET" class="mb-2">
+            <div>
                 <label for="department">Filter by Department:</label>
                 <select name="department" id="department">
                     <option value="">All Departments</option>
@@ -22,10 +23,26 @@
                         <option value="{{ $department->id }}">{{ $department->name }}</option>
                     @endforeach
                 </select>
-            @endif
+            </div>
         
-            <button type="submit">Apply Filter</button>
+            <div>
+                <label for="status">Filter by Status:</label>
+                <select name="statuss" id="statuss">
+                    <option value="">All Statuses</option>
+                    <option value="menunggu">Menunggu</option>
+                    <option value="revisi">Revisi</option>
+                    <option value="disetujui">Disetujui</option>
+                    <option value="ditolak">Ditolak</option>
+                    <option value="draft">Draft</option>
+                </select>
+            </div>
+            
+            <div>
+                <button type="submit">Apply Filter</button>
+            </div>
         </form>
+        
+        @endif
         <table id="data-table" class="table table-striped table-centered align-middle table-nowrap mb-0 table-check">
             <thead>
             <tr>
@@ -35,15 +52,15 @@
                 <th>Selesai</th>
                 <th>Total Jam Lembur</th>
                 @if (Auth::user()->hasRole('manager'))
-                    <th>Aksi</th>
+                    <th class="no-print">Aksi</th>
                 @endIf
                 @if (Auth::user()->hasRole('administrasi'))
-                    <th>Aksi</th>
+                    <th class="no-print">Aksi</th>
                 @endIf
                 @if (Auth::user()->hasRole('supervisor'))
-                    <th colspan="1">Action</th>
+                    <th colspan="1" class="no-print">Action</th>
                 @endIf
-                    <th>Alur</th>
+                    <th class="no-print">Alur</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +74,7 @@
                     @if (Auth::user()->hasRole('manager') && $suratPerintahLembur->splStatusLatest->status == 'menunggu')
                         <td><a href="{{ route('spl.tanggapi', $suratPerintahLembur->id) }}" class="btn btn-success"> Tanggapi </a></td>
                     @elseif (Auth::user()->hasRole('supervisor') && ($suratPerintahLembur->splStatusLatest->status == 'menunggu' || $suratPerintahLembur->splStatusLatest->status == 'revisi'))
-                    <td>
+                    <td class="no-print">
                         <div class="dropdown">
                             <a class="text-muted dropdown-toggle font-size-18" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true">
@@ -73,9 +90,9 @@
                         </div>
                     </td>
                     @else
-                        <td></td>
+                        <td class="no-print"></td>
                     @endIf
-                    <td> <a href="" class="btn btn-primary p-2">Timeline</a></td>
+                    <td> <a href="" class="no-print btn btn-primary p-2">Timeline</a></td>
                 </tr>
             @endforeach
             </tbody>

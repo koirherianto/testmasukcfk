@@ -33,13 +33,14 @@ class SuratPerintahLemburController extends AppBaseController
      * Display a listing of the SuratPerintahLembur.
      */
     public function index(Request $request)
-    {   
+    {
         $user = auth()->user();
         $selectedDepartment = $request->input('department');
+        $selectedStatus = $request->input('statuss');
 
         $query = SuratPerintahLembur::with('karyawan', 'splStatusLatest');
 
-        if ($user->hasRole('administrasi') && $selectedDepartment) { //filter by department
+        if ($selectedDepartment) {
             $query->whereHas('karyawan', function ($query) use ($selectedDepartment) {
                 $query->where('dapartement_id', $selectedDepartment);
             });
@@ -49,11 +50,16 @@ class SuratPerintahLemburController extends AppBaseController
             });
         }
 
+        if ($selectedStatus) {
+            $query->whereHas('splStatusLatest', function ($query) use ($selectedStatus) {
+                $query->where('status', $selectedStatus);
+            });
+        }
+
         $suratPerintahLemburs = $query->get();
 
         foreach ($suratPerintahLemburs as $item) {
-            // upper case
-            $item->spl_status_latest_status = strtoupper($item->splStatusLatest->status); 
+            $item->spl_status_latest_status = strtoupper($item->splStatusLatest->status);
             $item->spl_status_latest_status_color = $this->badgeColor($item->splStatusLatest->status);
         }
 
@@ -61,6 +67,7 @@ class SuratPerintahLemburController extends AppBaseController
 
         return view('surat_perintah_lemburs.index', compact('suratPerintahLemburs', 'user', 'departments'));
     }
+
 
     private function badgeColor($status) : string {
         switch ($status) {
