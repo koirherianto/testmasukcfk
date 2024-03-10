@@ -8,7 +8,7 @@
 
 <li>
     <a href={{ route('homex') }}>
-        <i class="bx bx-calendar-event icon nav-icon"></i>
+        <i class="bx bx-home-alt icon nav-icon"></i>
         <span class="menu-item" data-key="t-calendar">Home</span>
     </a>
 </li>
@@ -318,7 +318,7 @@
 @can('karyawan.index')
 <li>
     <a href="{{ route('karyawans.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
+        <i class="bx bx-user icon nav-icon"></i>
         <span class="menu-item">Karyawan</span>
     </a>
 </li>
@@ -327,11 +327,12 @@
 @can('suratPerintahLembur.index')
 <li>
     <a href="{{ route('suratPerintahLemburs.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
+        <i class="bx bx-file icon nav-icon"></i>
         <span class="menu-item">Surat Perintah Lembur</span>
-        </a>
+    </a>
 </li>
 @endcan
+
 
 @can('sPLStatus.index')
 <li>
