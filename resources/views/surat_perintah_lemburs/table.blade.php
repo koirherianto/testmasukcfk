@@ -36,6 +36,16 @@
                     <option value="draft">Draft</option>
                 </select>
             </div>
+
+            <div>
+                <label for="start_date">Dari:</label>
+                <input type="date" name="start_date" id="start_date">
+            </div>
+        
+            <div>
+                <label for="end_date">Sampai:</label>
+                <input type="date" name="end_date" id="end_date">
+            </div>
             
             <div>
                 <button type="submit">Apply Filter</button>
@@ -92,7 +102,7 @@
                     @else
                         <td class="no-print"></td>
                     @endIf
-                    <td> <a href="" class="no-print btn btn-primary p-2">Timeline</a></td>
+                    <td> <a href="{{ route('suratPerintahLemburs.timeline', $suratPerintahLembur->id) }}" class="no-print btn btn-primary p-2">Timeline</a></td>
                 </tr>
             @endforeach
             </tbody>

@@ -37,6 +37,8 @@ class SuratPerintahLemburController extends AppBaseController
         $user = auth()->user();
         $selectedDepartment = $request->input('department');
         $selectedStatus = $request->input('statuss');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
         $query = SuratPerintahLembur::with('karyawan', 'splStatusLatest');
 
@@ -55,6 +57,15 @@ class SuratPerintahLemburController extends AppBaseController
                 $query->where('status', $selectedStatus);
             });
         }
+
+        if ($startDate) {
+            $query->whereDate('mulai', '>=', $startDate);
+        }
+    
+        if ($endDate) {
+            $query->whereDate('selesai', '<=', $endDate);
+        }
+    
 
         $suratPerintahLemburs = $query->get();
 
@@ -278,5 +289,18 @@ class SuratPerintahLemburController extends AppBaseController
 
         Flash::success('Surat Perintah Lembur sudah ditanggapi.');
         return redirect(route('suratPerintahLemburs.index'));
+    }
+
+    function timeline($id) {
+        $suratPerintahLembur = $this->suratPerintahLemburRepository->find($id);
+        
+        if (empty($suratPerintahLembur)) {
+            Flash::error('Surat Perintah Lembur not found');
+            return redirect(route('suratPerintahLemburs.index'));
+        }
+
+        $splStatuses = SPLStatus::where('surat_perintah_lembur_id', $id)->orderBy('created_at', 'desc')->get();
+
+        return view('surat_perintah_lemburs.timeline', compact('suratPerintahLembur', 'splStatuses'));
     }
 }

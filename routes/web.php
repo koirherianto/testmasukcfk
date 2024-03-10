@@ -30,7 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('updatePassword', [UserController::class, 'updatePassword'])->name('update.password');
     Route::post('updateFotoProfile', [UserController::class, 'updateFotoProfile'])->name('update.foto.profile');
     
-    
     Route::resource('users', UserController::class);
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
@@ -39,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('karyawans', App\Http\Controllers\KaryawanController::class);
     Route::get('suratPerintahLemburs/tanggapi/{id}', [App\Http\Controllers\SuratPerintahLemburController::class, 'tanggapiView'])->name('spl.tanggapi');
     Route::post('suratPerintahLemburs/tanggapi/{id}', [App\Http\Controllers\SuratPerintahLemburController::class, 'tanggapi'])->name('spl.tanggapi.post');
+    Route::get('suratPerintahLemburs/{id}/timeline', [App\Http\Controllers\SuratPerintahLemburController::class, 'timeline'])->name('suratPerintahLemburs.timeline');
     Route::resource('suratPerintahLemburs', App\Http\Controllers\SuratPerintahLemburController::class);
     Route::resource('sPLStatuses', App\Http\Controllers\SPLStatusController::class);
 });
