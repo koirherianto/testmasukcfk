@@ -1,5 +1,5 @@
 /*
-Template Name: webadmin - Admin & Dashboard Template
+Template Name: Cahaya Fajar Kaltim
 Author: Themesdesign
 Version: 1.0.0
 Website: https://Themesdesign.com/
