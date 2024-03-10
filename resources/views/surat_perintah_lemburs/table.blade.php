@@ -6,13 +6,26 @@
             </h5>
         <div class="ms-auto">
             <div class="dropdown">
-                @can('suratPerintahLembur.index')
+                @can('suratPerintahLembur.create')
                 <a href="{{ route('suratPerintahLemburs.create') }}" class="btn btn-primary float-right"> Tambah Data </a>
                 @endcan
             </div>
         </div>
     </div>
     <div class="table-responsive">
+        <form action="{{ route('suratPerintahLemburs.index') }}" method="GET">
+            @if ($user->hasRole('administrasi'))
+                <label for="department">Filter by Department:</label>
+                <select name="department" id="department">
+                    <option value="">All Departments</option>
+                    @foreach($departments as $department)
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endforeach
+                </select>
+            @endif
+        
+            <button type="submit">Apply Filter</button>
+        </form>
         <table id="data-table" class="table table-striped table-centered align-middle table-nowrap mb-0 table-check">
             <thead>
             <tr>

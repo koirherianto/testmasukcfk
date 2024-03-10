@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\SuratPerintahLembur;
 use App\Models\Karyawan;
 use App\Models\SPLStatus;
+use App\Models\Dapartemen;
 use Flash;
 use DB;
 use Carbon\Carbon;
@@ -34,17 +35,21 @@ class SuratPerintahLemburController extends AppBaseController
     public function index(Request $request)
     {   
         $user = auth()->user();
-        if ($user->hasRole('administrasi')) {
-            $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')->get();
-        } else {
-            $dapartemenUser = $user->dapartemen();
+        $selectedDepartment = $request->input('department');
 
-            $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')
-                ->whereHas('karyawan', function ($query) use ($dapartemenUser) {
-                    $query->where('dapartement_id', $dapartemenUser->id);
-                })
-                ->get();
+        $query = SuratPerintahLembur::with('karyawan', 'splStatusLatest');
+
+        if ($user->hasRole('administrasi') && $selectedDepartment) { //filter by department
+            $query->whereHas('karyawan', function ($query) use ($selectedDepartment) {
+                $query->where('dapartement_id', $selectedDepartment);
+            });
+        } elseif (!$user->hasRole('administrasi')) {
+            $query->whereHas('karyawan', function ($query) use ($user) {
+                $query->where('dapartement_id', $user->dapartemen()->id);
+            });
         }
+
+        $suratPerintahLemburs = $query->get();
 
         foreach ($suratPerintahLemburs as $item) {
             // upper case
@@ -52,9 +57,10 @@ class SuratPerintahLemburController extends AppBaseController
             $item->spl_status_latest_status_color = $this->badgeColor($item->splStatusLatest->status);
         }
 
-        return view('surat_perintah_lemburs.index', compact('suratPerintahLemburs'));
-    }
+        $departments = Dapartemen::orderBy('name', 'asc')->get();
 
+        return view('surat_perintah_lemburs.index', compact('suratPerintahLemburs', 'user', 'departments'));
+    }
 
     private function badgeColor($status) : string {
         switch ($status) {
