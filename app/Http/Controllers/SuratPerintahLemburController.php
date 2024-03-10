@@ -35,19 +35,18 @@ class SuratPerintahLemburController extends AppBaseController
     {   
         $user = auth()->user();
         if ($user->hasRole('administrasi')) {
-            $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')->paginate(10);
-        }else { // jika bukan admin, maka tampilkan hanya surat perintah lembur yang dibuat oleh user tersebut
+            $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')->get();
+        } else {
             $dapartemenUser = $user->dapartemen();
 
-            // Assuming there is a 'dapartemen_id' column in the 'surat_perintah_lemburs' table
             $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')
                 ->whereHas('karyawan', function ($query) use ($dapartemenUser) {
                     $query->where('dapartement_id', $dapartemenUser->id);
                 })
-                ->paginate(10);
+                ->get();
         }
 
-        foreach ($suratPerintahLemburs->items() as $item) {
+        foreach ($suratPerintahLemburs as $item) {
             // upper case
             $item->spl_status_latest_status = strtoupper($item->splStatusLatest->status); 
             $item->spl_status_latest_status_color = $this->badgeColor($item->splStatusLatest->status);
@@ -55,6 +54,7 @@ class SuratPerintahLemburController extends AppBaseController
 
         return view('surat_perintah_lemburs.index', compact('suratPerintahLemburs'));
     }
+
 
     private function badgeColor($status) : string {
         switch ($status) {

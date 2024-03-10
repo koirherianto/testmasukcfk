@@ -69,10 +69,4 @@
         </table>
     </div>
     </div>
-
-    <div class="card-footer clearfix">
-        <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $suratPerintahLemburs])
-        </div>
-    </div>
 </div>
