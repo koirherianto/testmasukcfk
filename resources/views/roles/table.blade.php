@@ -6,7 +6,7 @@
             </h5>
         <div class="ms-auto">
             <div class="dropdown">
-                @can('role.index')
+                @can('role.create')
                 <a class="btn btn-primary float-right" href="{{ route('roles.create') }}">
                     Add Role
                 </a>

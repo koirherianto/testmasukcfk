@@ -32,8 +32,20 @@ class SuratPerintahLemburController extends AppBaseController
      * Display a listing of the SuratPerintahLembur.
      */
     public function index(Request $request)
-    {
-        $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')->paginate(10);
+    {   
+        $user = auth()->user();
+        if ($user->hasRole('administrasi')) {
+            $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')->paginate(10);
+        }else { // jika bukan admin, maka tampilkan hanya surat perintah lembur yang dibuat oleh user tersebut
+            $dapartemenUser = $user->dapartemen();
+
+            // Assuming there is a 'dapartemen_id' column in the 'surat_perintah_lemburs' table
+            $suratPerintahLemburs = SuratPerintahLembur::with('karyawan','splStatusLatest')
+                ->whereHas('karyawan', function ($query) use ($dapartemenUser) {
+                    $query->where('dapartement_id', $dapartemenUser->id);
+                })
+                ->paginate(10);
+        }
 
         foreach ($suratPerintahLemburs->items() as $item) {
             // upper case

@@ -92,35 +92,6 @@
                                             <div class="mt-4">
                                                 <button class="btn btn-primary w-100" type="submit">Register</button>
                                             </div>
-
-
-                                            <div class="mt-4 text-center">
-                                                <div class="signin-other-title">
-                                                    <h5 class="font-size-14 mb-3 mt-2 title"> Sign in with </h5>
-                                                </div>
-
-                                                <ul class="list-inline mt-2">
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript:void()"
-                                                            class="social-list-item bg-primary text-white border-primary">
-                                                            <i class="bx bxl-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript:void()"
-                                                            class="social-list-item bg-info text-white border-info">
-                                                            <i class="bx bxl-linkedin"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a href="javascript:void()"
-                                                            class="social-list-item bg-danger text-white border-danger">
-                                                            <i class="bx bxl-google"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
                                             <div class="mt-4 text-center">
                                                 <p class="mb-0">Already have an account ? <a href="{{ route('login') }}"
                                                         class="fw-medium text-primary"> Login</a></p>

@@ -28,7 +28,7 @@
                     <th>Aksi</th>
                 @endIf
                 @if (Auth::user()->hasRole('supervisor'))
-                    <th colspan="3">Action</th>
+                    <th colspan="1">Action</th>
                 @endIf
                     <th>Alur</th>
                 </tr>
