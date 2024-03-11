@@ -128,9 +128,21 @@ class SuratPerintahLemburController extends AppBaseController
         // Hitung selisih waktu dalam jam dan simpan sebagai format time
         $selisihWaktu = $selesai->diff($mulai);
 
-        // jika selisih waktu kurang dari 1 menit, maka tampilkan error
-        if ($selisihWaktu->i < 0) {
-            Flash::error('Waktu lembur tidak boleh kurang dari 1 menit');
+        // Konversi DateInterval ke total menit
+        $totalMenit = $selisihWaktu->days * 24 * 60 + // Menit dalam hari
+            $selisihWaktu->h * 60 +         // Menit dalam jam
+            $selisihWaktu->i;   // Menit
+        $totalMenit = (int)$totalMenit;  
+        
+        // jika selisih waktu kurang dari 5 menit, maka tampilkan error
+        if ($totalMenit < 5) {
+            Flash::error('Waktu lembur tidak boleh kurang dari 5 menit');
+            return redirect(route('suratPerintahLemburs.create'));
+        }
+
+        // jika lembur lebih dari 23 jam, maka tampilkan error
+        if ($totalMenit > 1380) {
+            Flash::error('Waktu lembur tidak boleh lebih dari 8 jam');
             return redirect(route('suratPerintahLemburs.create'));
         }
 
@@ -207,9 +219,21 @@ class SuratPerintahLemburController extends AppBaseController
         // Hitung selisih waktu dalam jam dan simpan sebagai format time
         $selisihWaktu = $selesai->diff($mulai);
 
-        // jika selisih waktu kurang dari 1 menit, maka tampilkan error
-        if ($selisihWaktu->i < 0) {
-            Flash::error('Waktu lembur tidak boleh kurang dari 1 menit');
+        // Konversi DateInterval ke total menit
+        $totalMenit = $selisihWaktu->days * 24 * 60 + // Menit dalam hari
+            $selisihWaktu->h * 60 +         // Menit dalam jam
+            $selisihWaktu->i;               // Menit
+        $totalMenit = (int) $totalMenit;             
+        
+        // jika selisih waktu kurang dari 5 menit, maka tampilkan error
+        if ($totalMenit < 5) {
+            Flash::error('Waktu lembur tidak boleh kurang dari 5 menit');
+            return redirect(route('suratPerintahLemburs.create'));
+        }
+
+        // jika selisih waktu lebih dari 23 jam, maka tampilkan error
+        if ($totalMenit > 1380 ) {
+            Flash::error('Waktu lembur tidak boleh lebih dari 8 jam');
             return redirect(route('suratPerintahLemburs.create'));
         }
 

@@ -304,16 +304,16 @@
 </li>
 @endcan
 
-<li class="menu-title">User</li>
-
 @can('dapartemen.index')
 <li>
     <a href="{{ route('dapartemens.index') }}">
-        <i class="bx bx-home-alt icon nav-icon"></i>
+        <i class="bx bx-building icon nav-icon"></i>
         <span class="menu-item">Dapartemen</span>
     </a>
 </li>
 @endcan
+
+<li class="menu-title">User</li>
 
 @can('karyawan.index')
 <li>
