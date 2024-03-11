@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
 @section('title')
-    Create Surat Perintah Lemburs
+    Create Surat Perintah Lembur
 @endsection
 
 @section('page-title')
-Create Surat Perintah Lemburs
+Create Surat Perintah Lembur
 @endsection
 
 @section('body')

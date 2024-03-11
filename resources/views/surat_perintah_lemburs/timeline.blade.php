@@ -321,7 +321,7 @@ body {
                     <li>
                     <div class="direction-{{ ($splStatus->status === 'draft' || $splStatus->status === 'menunggu') ? 'r' : 'l' }}">
                         <div class="flag-wrapper">
-                        <span class="flag ">Disetujui: {{ $splStatus->approvedBy->name ?? 'N/A' }}</span> 
+                        <span class="flag "> Dari: {{ $splStatus->approvedBy->name ?? 'N/A' }}</span> 
                         <span class="time-wrapper text-dark"><span class="time">{{ $splStatus->created_at->format('Y-m-d') }}</span></span> 
                         <span class="time-wrapper text-dark"><span class="time">{{ $splStatus->created_at->format('H:i') }}</span></span> 
                         </div>

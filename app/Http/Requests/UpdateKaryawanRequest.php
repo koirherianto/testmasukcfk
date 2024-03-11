@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Karyawan;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateKaryawanRequest extends FormRequest
 {
@@ -24,8 +25,18 @@ class UpdateKaryawanRequest extends FormRequest
      */
     public function rules()
     {
+        $karyawanId = $this->route('karyawan'); // Mendapatkan ID karyawan dari URL
+
         $rules = Karyawan::$rules;
         
+        // Menambahkan aturan validasi agar NIK tidak boleh sama, kecuali untuk karyawan yang bersangkutan
+        $rules['nik'] = [
+            'required',
+            'string',
+            'max:45',
+            Rule::unique('karyawans', 'nik')->ignore($karyawanId),
+        ];
+
         return $rules;
     }
 }

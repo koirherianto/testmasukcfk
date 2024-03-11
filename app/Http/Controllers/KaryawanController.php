@@ -11,6 +11,7 @@ use App\Models\Dapartemen;
 use App\Models\Karyawan;
 use Flash;
 use Auth;
+use DB;
 
 class KaryawanController extends AppBaseController
 {
@@ -130,7 +131,13 @@ class KaryawanController extends AppBaseController
             return redirect(route('karyawans.index'));
         }
 
-        $this->karyawanRepository->delete($id);
+        DB::transaction(function () use ($karyawan, $id) {
+            foreach ($karyawan->suratPerintahLemburs as $suratPerintahLembur) {
+                $suratPerintahLembur->splStatuses()->delete();
+                $suratPerintahLembur->delete();
+            }
+            $this->karyawanRepository->delete($id);
+        });
 
         Flash::success('Karyawan deleted successfully.');
         return redirect(route('karyawans.index'));

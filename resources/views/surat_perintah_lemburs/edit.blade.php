@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-        Edit Surat Perintah Lembur
-    @endsection
+    Edit Surat Perintah Lembur
+@endsection
 
 @section('page-title')
-    
     Edit Surat Perintah Lembur
 @endsection
 
