@@ -61,6 +61,7 @@
                 <th>Mulai</th>
                 <th>Selesai</th>
                 <th>Total Jam Lembur</th>
+                <th>Alasan</th>
                 @if (Auth::user()->hasRole('manager'))
                     <th class="no-print">Aksi</th>
                 @endIf
@@ -81,6 +82,7 @@
                     <td>{{ $suratPerintahLembur->mulai->format('d-m-Y H:i') }}</td>
                     <td>{{ $suratPerintahLembur->selesai->format('d-m-Y H:i') }}</td>
                     <td>{{ $suratPerintahLembur->total_jam_lembur }}</td>
+                    <td>{{ $suratPerintahLembur->alasan }}</td>
                     @if (Auth::user()->hasRole('manager') && $suratPerintahLembur->splStatusLatest->status == 'menunggu')
                         <td><a href="{{ route('spl.tanggapi', $suratPerintahLembur->id) }}" class="btn btn-success"> Tanggapi </a></td>
                     @elseif (Auth::user()->hasRole('supervisor') && ($suratPerintahLembur->splStatusLatest->status == 'menunggu' || $suratPerintahLembur->splStatusLatest->status == 'revisi'))

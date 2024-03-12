@@ -46,9 +46,15 @@
     <p>{{ $suratPerintahLembur->updated_at }}</p>
 </div>
 
+{{-- alasan --}}
+<div class="col-sm-12">
+    {!! Form::label('alasan', 'Alasan:') !!}
+    <p>{{ $suratPerintahLembur->alasan }}</p>
+</div>
+
 {{-- pesan status terakhir --}}
 <div class="col-sm-12">
     {!! Form::label('pesan_status_terakhir', 'Pesan Status Terakhir:') !!}
-    <p>{{ $suratPerintahLembur->splStatusLatest->pesan }}</p>
+    <p>{{ $suratPerintahLembur->splStatusLatest->message }}</p>
 </div>
 

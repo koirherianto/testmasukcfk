@@ -41,6 +41,7 @@ class SuratPerintahLemburController extends AppBaseController
         $endDate = $request->input('end_date');
 
         $query = SuratPerintahLembur::with('karyawan', 'splStatusLatest');
+        $query->orderBy('created_at', 'desc');
 
         if ($selectedDepartment) {
             $query->whereHas('karyawan', function ($query) use ($selectedDepartment) {

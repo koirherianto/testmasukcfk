@@ -55,3 +55,13 @@
 </div> --}}
 
 <input type="hidden" name="total_jam_lembur" value="-">
+
+<div class="form-group col-sm-12 col-lg-12 mb-2">
+    {!! Form::label('alasan', 'Alasan:') !!}
+    {!! Form::textarea('alasan', null, ['class' => 'form-control', 'maxlength' => 65535]) !!}
+    @error('alasan') 
+        <span class="invalid-feedback d-block" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror 
+</div>
