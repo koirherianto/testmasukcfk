@@ -14,7 +14,8 @@ class SuratPerintahLembur extends Model
         'karyawan_id',
         'mulai',
         'selesai',
-        'total_jam_lembur'
+        'total_jam_lembur',
+        'alasan'
     ];
 
     protected $casts = [
